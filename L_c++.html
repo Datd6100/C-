@@ -1499,7 +1499,9 @@ public:
 </section>
 
 <section>
-  <h2>7️⃣ Mảng (Array)</h2>
+    <details>
+  <summary><h2>7️⃣ Mảng (Array)</h2>
+  </summary>
   <p>👉 Mảng lưu trữ nhiều phần tử cùng kiểu dữ liệu trong một biến duy nhất.</p>
 
   <b>Ví dụ:</b>
@@ -1510,10 +1512,208 @@ for(int i=0; i&lt;5; i++) {
   cout &lt;&lt; a[i] &lt;&lt; " ";
 }
 // Kết quả: 1 2 3 4 5</code></pre>
-</section>
+
+<!DOCTYPE html>
+
+<body>
 
 <section>
-  <h2>8️⃣ Chuỗi (String)</h2>
+    <details>
+<summary><h1>🧮 TOÀN BỘ LỆNH C++ VỀ MẢNG (ARRAY)</h1></summary>
+
+<hr>
+
+<h2>🧩 I. MẢNG LÀ GÌ?</h2>
+<p>🔹 Mảng (array) là tập hợp các phần tử có cùng kiểu dữ liệu, được lưu liên tiếp trong bộ nhớ.<br>
+🔹 Mỗi phần tử trong mảng được truy cập qua chỉ số (index), bắt đầu từ 0.</p>
+
+<hr>
+
+<h2>📘 II. KHAI BÁO MẢNG</h2>
+<p>🔹 <b>Cú pháp chung:</b></p>
+<pre><code>kiểu_dữ_liệu tên_mảng[kích_thước];</code></pre>
+
+<p>💡 <b>Ví dụ:</b></p>
+<pre><code>int a[5];         // Mảng 5 phần tử kiểu int
+float diem[10];   // Mảng 10 phần tử kiểu float
+char chu[20];     // Mảng ký tự (chuỗi)
+
+int x[5] = {1, 2, 3, 4, 5};
+int y[] = {10, 20, 30};
+char z[] = {'H', 'i', '\0'}; // tương đương "Hi"</code></pre>
+
+<hr>
+
+<h2>📦 III. TRUY CẬP PHẦN TỬ TRONG MẢNG</h2>
+<p>🧠 Cú pháp: <code>tên_mảng[chỉ_số]</code></p>
+
+<pre><code>int a[3] = {5, 10, 15};
+cout &lt;&lt; a[0]; // in ra 5
+cout &lt;&lt; a[2]; // in ra 15
+a[1] = 20;    // gán giá trị mới cho phần tử thứ 2
+</code></pre>
+
+<hr>
+
+<h2>🔁 IV. DUYỆT MẢNG (VỚI VÒNG LẶP)</h2>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[5] = {1, 2, 3, 4, 5};
+
+    for (int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; "a[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; a[i] &lt;&lt; endl;
+    }
+}</code></pre>
+
+<p>📝 Kết quả:</p>
+<pre><code>a[0] = 1
+a[1] = 2
+a[2] = 3
+a[3] = 4
+a[4] = 5</code></pre>
+
+<hr>
+
+<h2>🔄 V. NHẬP – XUẤT DỮ LIỆU MẢNG</h2>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n, a[100];
+    cout &lt;&lt; "Nhập số phần tử: ";
+    cin &gt;&gt; n;
+
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; "a[" &lt;&lt; i &lt;&lt; "] = ";
+        cin &gt;&gt; a[i];
+    }
+
+    cout &lt;&lt; "Các phần tử: ";
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+    }
+}</code></pre>
+
+<hr>
+
+<h2>🧮 VI. MẢNG 2 CHIỀU</h2>
+<p>🧠 Cú pháp: <code>kiểu_dữ_liệu tên_mảng[hàng][cột];</code></p>
+
+<pre><code>int a[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+for (int i = 0; i &lt; 2; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        cout &lt;&lt; a[i][j] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}</code></pre>
+
+<p>📝 Kết quả:</p>
+<pre><code>1 2 3
+4 5 6</code></pre>
+
+<hr>
+
+<h2>⚙️ VII. MẢNG ĐA CHIỀU (3 chiều trở lên)</h2>
+<pre><code>int arr[x][y][z];
+
+int cube[2][2][2] = {
+    {{1, 2}, {3, 4}},
+    {{5, 6}, {7, 8}}
+};</code></pre>
+
+<hr>
+
+<h2>🧰 VIII. LỆNH &amp; HÀM HỮU ÍCH VỚI MẢNG</h2>
+<table>
+<tr><th>Lệnh / Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td><code>sizeof(array)</code></td><td>Trả về kích thước (tính theo byte)</td><td><code>sizeof(a)</code></td></tr>
+<tr><td><code>sizeof(a)/sizeof(a[0])</code></td><td>Số phần tử trong mảng</td><td><code>int n = sizeof(a)/sizeof(a[0]);</code></td></tr>
+<tr><td><code>memset(a, 0, sizeof(a));</code></td><td>Gán toàn bộ mảng = 0 (cần &lt;cstring&gt;)</td><td>–</td></tr>
+<tr><td><code>sort(a, a+n);</code></td><td>Sắp xếp mảng (cần &lt;algorithm&gt;)</td><td>–</td></tr>
+<tr><td><code>reverse(a, a+n);</code></td><td>Đảo ngược mảng (cần &lt;algorithm&gt;)</td><td>–</td></tr>
+<tr><td><code>min_element(a, a+n)</code></td><td>Trả về phần tử nhỏ nhất</td><td>–</td></tr>
+<tr><td><code>max_element(a, a+n)</code></td><td>Trả về phần tử lớn nhất</td><td>–</td></tr>
+</table>
+
+<hr>
+
+<h2>💬 IX. MẢNG KÝ TỰ (CHAR ARRAY)</h2>
+<pre><code>char name[20] = "Van Do";
+cout &lt;&lt; name;  // In ra: Van Do
+</code></pre>
+<p>📌 Chuỗi ký tự phải kết thúc bằng ký tự <code>'\0'</code> (null terminator).</p>
+
+<hr>
+
+<h2>🧮 X. MẢNG ĐỘNG (Dynamic Array – dùng new)</h2>
+<pre><code>int n;
+cout &lt;&lt; "Nhập n: ";
+cin &gt;&gt; n;
+
+int* a = new int[n];
+
+for (int i = 0; i &lt; n; i++)
+    a[i] = i * 2;
+
+for (int i = 0; i &lt; n; i++)
+    cout &lt;&lt; a[i] &lt;&lt; " ";
+
+delete[] a;
+</code></pre>
+
+<hr>
+
+<h2>🚀 XI. RANGE-BASED FOR LOOP (C++11+)</h2>
+<pre><code>int a[] = {2, 4, 6, 8};
+for (int x : a) {
+    cout &lt;&lt; x &lt;&lt; " ";
+}
+</code></pre>
+<p>📤 Kết quả:</p>
+<pre><code>2 4 6 8</code></pre>
+
+<hr>
+
+<h2>🧾 XII. MẢNG TRONG HÀM</h2>
+<pre><code>void inMang(int a[], int n) {
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+}
+
+int main() {
+    int b[] = {1, 2, 3, 4};
+    inMang(b, 4);
+}</code></pre>
+
+<hr>
+
+<h2>⚠️ XIII. LỖI THƯỜNG GẶP</h2>
+<table>
+<tr><th>Lỗi</th><th>Nguyên nhân</th><th>Cách khắc phục</th></tr>
+<tr><td>Array index out of bounds</td><td>Truy cập chỉ số ngoài phạm vi</td><td>Đảm bảo 0 ≤ i &lt; n</td></tr>
+<tr><td>Không khởi tạo mảng</td><td>Dùng giá trị rác</td><td>Gán giá trị mặc định hoặc dùng memset</td></tr>
+<tr><td>Quên delete[]</td><td>Rò rỉ bộ nhớ khi dùng new</td><td>Luôn giải phóng khi xong</td></tr>
+</table>
+
+<hr>
+
+
+</body>
+</html>
+ </details>
+ </details>
+</section>
+</section>
+<section>
+<details>
+  <summary>
+  <h2>8️⃣ Chuỗi (String)</h2></summary>
   <p>👉 Chuỗi là dãy ký tự, trong C++ có thể dùng <code>string</code> (cần &lt;string&gt;).</p>
 
   <b>Ví dụ:</b>
@@ -1525,28 +1725,165 @@ cout &lt;&lt; "Độ dài: " &lt;&lt; name.length() &lt;&lt; endl;
 // Kết quả:
 // Tên: Van
 // Độ dài: 3</code></pre>
+<section>
+<details>
+  <summary>
+<h2>🧠 TOÀN BỘ LỆNH &amp; CÚ PHÁP TRONG THƯ VIỆN &lt;string&gt;</h2></summary>
+<section>
+<p><b>Thư viện:</b></p>
+<pre><code>#include &lt;string&gt;
+using namespace std;
+</code></pre>
+<p><b>Khai báo chuỗi:</b></p>
+<pre><code>string s;               // Chuỗi rỗng
+string s2 = "Hello";    // Chuỗi khởi tạo
+</code></pre>
 </section>
 
 <section>
-  <h2>Ví dụ tổng hợp</h2>
-  <pre><code>#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-  int a, b;
-  cout &lt;&lt; "Nhap a va b: ";
-  cin &gt;&gt; a &gt;&gt; b;
-
-  if (b != 0)
-    cout &lt;&lt; "Tong: " &lt;&lt; a + b &lt;&lt; "\n"
-         &lt;&lt; "Thuong: " &lt;&lt; a / b &lt;&lt; endl;
-  else
-    cout &lt;&lt; "Khong the chia cho 0\n";
-
-  return 0;
-}</code></pre>
+<h2>🧱 I. Các cách khởi tạo chuỗi</h2>
+<table>
+<tr><th>Cú pháp</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>string s;</td><td>Chuỗi rỗng</td><td>string a;</td></tr>
+<tr><td>string s("Hello");</td><td>Chuỗi từ hằng ký tự</td><td>string b("Xin chào");</td></tr>
+<tr><td>string s(5, 'A');</td><td>Gồm 5 ký tự ‘A’</td><td>"AAAAA"</td></tr>
+<tr><td>string s2(s1);</td><td>Sao chép chuỗi khác</td><td>string s2(s1);</td></tr>
+<tr><td>string s(s1, pos, n);</td><td>Lấy từ chuỗi khác, bắt đầu pos, dài n</td><td>string t(s1, 2, 3);</td></tr>
+<tr><td>string s = {'H','i'};</td><td>Danh sách ký tự</td><td>"Hi"</td></tr>
+</table>
 </section>
 
+<section>
+<h2>🔠 II. Các toán tử của chuỗi</h2>
+<table>
+<tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+<tr><td>=</td><td>Gán chuỗi</td><td>s = "ABC";</td></tr>
+<tr><td>+</td><td>Nối chuỗi</td><td>s = a + b;</td></tr>
+<tr><td>+=</td><td>Nối và gán</td><td>s += "DEF";</td></tr>
+<tr><td>==, !=</td><td>So sánh bằng/khác</td><td>if (a == b)</td></tr>
+<tr><td>&lt;, &gt;, &lt;=, &gt;=</td><td>So sánh theo từ điển</td><td>if (a &lt; b)</td></tr>
+<tr><td>[i]</td><td>Truy cập ký tự thứ i</td><td>s[0] = 'X';</td></tr>
+<tr><td>&lt;&lt;, &gt;&gt;</td><td>Xuất / nhập</td><td>cin &gt;&gt; s; cout &lt;&lt; s;</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🎯 III. Các hàm thành viên của lớp string</h2>
+
+<h3>1️⃣ Nhóm thông tin</h3>
+<table>
+<tr><th>Hàm</th><th>Chức năng</th><th>Ví dụ</th></tr>
+<tr><td>s.length()</td><td>Độ dài chuỗi</td><td>cout &lt;&lt; s.length();</td></tr>
+<tr><td>s.size()</td><td>Giống length()</td><td></td></tr>
+<tr><td>s.max_size()</td><td>Số ký tự tối đa có thể chứa</td><td></td></tr>
+<tr><td>s.capacity()</td><td>Dung lượng hiện có</td><td></td></tr>
+<tr><td>s.empty()</td><td>Kiểm tra chuỗi rỗng</td><td>if (s.empty())</td></tr>
+</table>
+
+<h3>2️⃣ Nhóm truy cập / thay đổi nội dung</h3>
+<table>
+<tr><th>Hàm</th><th>Chức năng</th><th>Ví dụ</th></tr>
+<tr><td>s.at(i)</td><td>Truy cập ký tự có kiểm tra biên</td><td>cout &lt;&lt; s.at(2);</td></tr>
+<tr><td>s[i]</td><td>Truy cập nhanh (không kiểm tra biên)</td><td></td></tr>
+<tr><td>s.front()</td><td>Ký tự đầu tiên</td><td></td></tr>
+<tr><td>s.back()</td><td>Ký tự cuối cùng</td><td></td></tr>
+<tr><td>s.clear()</td><td>Xóa toàn bộ chuỗi</td><td></td></tr>
+<tr><td>s.push_back('A')</td><td>Thêm ký tự cuối</td><td></td></tr>
+<tr><td>s.pop_back()</td><td>Xóa ký tự cuối</td><td></td></tr>
+</table>
+</section>
+
+<section>
+<h3>3️⃣ Nhóm thêm / nối chuỗi</h3>
+<table>
+<tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>s.append(str)</td><td>Thêm chuỗi str</td><td>s.append("abc");</td></tr>
+<tr><td>s += "abc"</td><td>Tương tự append</td><td></td></tr>
+<tr><td>s.insert(pos, str)</td><td>Chèn chuỗi tại vị trí pos</td><td>s.insert(2, "XYZ");</td></tr>
+<tr><td>s.replace(pos, n, str)</td><td>Thay n ký tự tại pos bằng str</td><td></td></tr>
+<tr><td>s.assign(str)</td><td>Gán giá trị chuỗi mới</td><td></td></tr>
+<tr><td>s.swap(str2)</td><td>Hoán đổi nội dung</td><td></td></tr>
+</table>
+</section>
+
+<section>
+<h3>4️⃣ Nhóm tìm kiếm</h3>
+<table>
+<tr><th>Hàm</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+<tr><td>s.find(str)</td><td>Tìm vị trí đầu tiên của str</td><td>s.find("ab")</td></tr>
+<tr><td>s.rfind(str)</td><td>Tìm vị trí cuối cùng của str</td><td></td></tr>
+<tr><td>s.find_first_of(chars)</td><td>Tìm ký tự đầu tiên thuộc tập chars</td><td></td></tr>
+<tr><td>s.find_last_of(chars)</td><td>Tìm ký tự cuối cùng thuộc tập chars</td><td></td></tr>
+<tr><td>s.find_first_not_of(chars)</td><td>Tìm ký tự đầu tiên không thuộc tập chars</td><td></td></tr>
+<tr><td>s.find_last_not_of(chars)</td><td>Ngược lại của trên</td><td></td></tr>
+</table>
+<p><b>🟢 Trả về:</b><br>
+Vị trí (chỉ số) nếu tìm thấy<br>
+<code>string::npos</code> nếu không thấy
+</p>
+</section>
+
+<section>
+<h3>✂️ 5️⃣ Nhóm cắt chuỗi</h3>
+<table>
+<tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>s.substr(pos, n)</td><td>Lấy chuỗi con</td><td>s.substr(2,3)</td></tr>
+<tr><td>s.erase(pos, n)</td><td>Xóa n ký tự từ pos</td><td>s.erase(1,2)</td></tr>
+<tr><td>s.resize(n)</td><td>Thay đổi độ dài chuỗi</td><td></td></tr>
+<tr><td>s.shrink_to_fit()</td><td>Giảm bộ nhớ dư thừa</td><td></td></tr>
+</table>
+</section>
+
+<section>
+<h3>🧮 6️⃣ Nhóm so sánh &amp; chuyển đổi</h3>
+<table>
+<tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>s.compare(str2)</td><td>So sánh (0 nếu bằng nhau)</td><td></td></tr>
+<tr><td>s.c_str()</td><td>Trả C-string (dùng cho hàm C)</td><td>printf("%s", s.c_str());</td></tr>
+<tr><td>s.data()</td><td>Giống c_str() nhưng có thể chứa '\0'</td><td></td></tr>
+<tr><td>stoi(s), stof(s), stod(s)</td><td>Chuyển string thành số</td><td></td></tr>
+<tr><td>to_string(x)</td><td>Chuyển số thành chuỗi</td><td>string s = to_string(123);</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🧰 VII. Một số ví dụ tổng hợp</h2>
+<pre><code>// Ví dụ 1
+string a = "Hello", b = "World";
+string c = a + " " + b;
+cout &lt;&lt; c &lt;&lt; " (" &lt;&lt; c.length() &lt;&lt; " ký tự)";
+
+// Ví dụ 2
+string s = "xin chao ban";
+int pos = s.find("ban");
+if (pos != string::npos)
+    s.replace(pos, 3, "bạn");
+cout &lt;&lt; s;
+
+// Ví dụ 3
+string s = "abcdef";
+cout &lt;&lt; s.substr(2, 3);
+s.erase(1, 2);
+cout &lt;&lt; s;
+
+// Ví dụ 4
+string s = "  Hello  ";
+s.erase(0, s.find_first_not_of(' '));
+s.erase(s.find_last_not_of(' ') + 1);
+cout &lt;&lt; "[" &lt;&lt; s &lt;&lt; "]";
+</code></pre>
+</section>
+
+<section>
+<h2>🧮 VIII. Các hằng số quan trọng</h2>
+<table>
+<tr><th>Hằng số</th><th>Ý nghĩa</th></tr>
+<tr><td>string::npos</td><td>Giá trị đặc biệt khi không tìm thấy (thường là -1)</td></tr>
+</table>
+
+ </details>
+</section>
+</section>
 <section>
 <details>
   <summary><h2>9️⃣ Tạm dừng chương trình (Sleep / Delay)</h2></summary>
@@ -1787,6 +2124,163 @@ int main() {
   </table>
 </details>
   </section>
+  
+  <section style="font-family: Arial, sans-serif; background: #f9fafb; padding: 20px; border-radius: 12px;">
+           <details>
+    <summary><h3 style="text-align:center;">🧮 THƯ VIỆN &lt;cmath&gt; – Toán học C++</h3></summary>
+  <blockquote style="border-left: 4px solid #4caf50; padding-left: 10px; color:#444;">
+    Thư viện <code>&lt;cmath&gt;</code> (hoặc <code>&lt;math.h&gt;</code>) cung cấp toàn bộ các hàm xử lý số học, lượng giác, logarit, mũ, làm tròn, căn bậc...
+  </blockquote>
+
+  <hr>
+
+  <h3>🟢 I. Hàm lũy thừa, căn bậc, giá trị tuyệt đối</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; min-width:600px; background:white;">
+      <thead style="background:#d4edda;">
+        <tr>
+          <th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>abs(x)</td><td>Giá trị tuyệt đối (int, float, double)</td><td>abs(-7)</td><td>7</td></tr>
+        <tr><td>fabs(x)</td><td>Giá trị tuyệt đối (dành cho double)</td><td>fabs(-3.14)</td><td>3.14</td></tr>
+        <tr><td>sqrt(x)</td><td>Căn bậc hai</td><td>sqrt(9)</td><td>3</td></tr>
+        <tr><td>cbrt(x)</td><td>Căn bậc ba</td><td>cbrt(8)</td><td>2</td></tr>
+        <tr><td>pow(x, y)</td><td>Lũy thừa (x^y)</td><td>pow(2, 3)</td><td>8</td></tr>
+        <tr><td>hypot(x, y)</td><td>√(x² + y²) – tránh tràn số</td><td>hypot(3, 4)</td><td>5</td></tr>
+        <tr><td>square(x)</td><td>Bình phương (C++26 có thể thêm chính thức)</td><td>square(5)</td><td>25 (tạm viết x*x thay thế)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🟠 II. Hàm logarit và số mũ</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#fff3cd;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>exp(x)</td><td>e^x</td><td>exp(1)</td><td>2.71828</td></tr>
+        <tr><td>expm1(x)</td><td>e^x - 1 (chính xác hơn với x nhỏ)</td><td>expm1(0.001)</td><td>≈ 0.0010005</td></tr>
+        <tr><td>log(x)</td><td>log_e(x) – logarit tự nhiên</td><td>log(2.71828)</td><td>1</td></tr>
+        <tr><td>log10(x)</td><td>log cơ số 10</td><td>log10(1000)</td><td>3</td></tr>
+        <tr><td>log2(x)</td><td>log cơ số 2</td><td>log2(8)</td><td>3</td></tr>
+        <tr><td>log1p(x)</td><td>log(1 + x) – chính xác với x rất nhỏ</td><td>log1p(0.001)</td><td>≈ 0.0009995</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🔵 III. Hàm lượng giác (radian)</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#cfe2ff;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>sin(x)</td><td>sin(x)</td><td>sin(π/2)</td><td>1</td></tr>
+        <tr><td>cos(x)</td><td>cos(x)</td><td>cos(0)</td><td>1</td></tr>
+        <tr><td>tan(x)</td><td>tan(x)</td><td>tan(π/4)</td><td>1</td></tr>
+        <tr><td>asin(x)</td><td>arcsin(x)</td><td>asin(1)</td><td>π/2</td></tr>
+        <tr><td>acos(x)</td><td>arccos(x)</td><td>acos(0)</td><td>π/2</td></tr>
+        <tr><td>atan(x)</td><td>arctan(x)</td><td>atan(1)</td><td>π/4</td></tr>
+        <tr><td>atan2(y, x)</td><td>arctan(y/x) – chính xác góc phần tư</td><td>atan2(1, 1)</td><td>π/4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🟣 IV. Hàm lượng giác hyperbol (hyperbolic)</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#e2d9f3;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>sinh(x)</td><td>sin hyperbol</td><td>sinh(0) = 0</td></tr>
+        <tr><td>cosh(x)</td><td>cos hyperbol</td><td>cosh(0) = 1</td></tr>
+        <tr><td>tanh(x)</td><td>tan hyperbol</td><td>tanh(1) ≈ 0.761</td></tr>
+        <tr><td>asinh(x)</td><td>arcsinh(x)</td><td>asinh(1) ≈ 0.881</td></tr>
+        <tr><td>acosh(x)</td><td>arccosh(x)</td><td>acosh(2) ≈ 1.316</td></tr>
+        <tr><td>atanh(x)</td><td>arctanh(x)</td><td>atanh(0.5) ≈ 0.549</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🟤 V. Hàm làm tròn số</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#f8d7da;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ceil(x)</td><td>Làm tròn lên</td><td>ceil(2.3)</td><td>3</td></tr>
+        <tr><td>floor(x)</td><td>Làm tròn xuống</td><td>floor(2.9)</td><td>2</td></tr>
+        <tr><td>round(x)</td><td>Làm tròn gần nhất</td><td>round(2.5)</td><td>3</td></tr>
+        <tr><td>trunc(x)</td><td>Cắt bỏ phần thập phân</td><td>trunc(2.9)</td><td>2</td></tr>
+        <tr><td>nearbyint(x)</td><td>Làm tròn gần nhất theo chế độ hiện tại</td><td>–</td><td>–</td></tr>
+        <tr><td>rint(x)</td><td>Tương tự nearbyint, trả về double</td><td>–</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🧩 VI. Hàm số dư và chia</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#dee2e6;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>fmod(x, y)</td><td>Phần dư của phép chia thực</td><td>fmod(5.3, 2)</td><td>1.3</td></tr>
+        <tr><td>remainder(x, y)</td><td>Phần dư theo chuẩn IEEE</td><td>remainder(5.3, 2)</td><td>-0.7</td></tr>
+        <tr><td>remquo(x, y, &quo)</td><td>Lấy phần dư và phần nguyên của phép chia</td><td>–</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🧠 VII. Hàm kiểm tra và so sánh</h3>
+  <ul>
+    <li><code>isnan(x)</code> – Kiểm tra x có phải NaN (Not a Number)</li>
+    <li><code>isinf(x)</code> – Kiểm tra x có vô cực (∞)</li>
+    <li><code>isfinite(x)</code> – Kiểm tra x có hữu hạn</li>
+    <li><code>signbit(x)</code> – Kiểm tra bit dấu (số âm)</li>
+    <li><code>fpclassify(x)</code> – Phân loại số (NaN, 0, normal...)</li>
+  </ul>
+
+  <hr>
+
+  <h3>🧮 VIII. Hàm góc & độ</h3>
+  <ul>
+    <li><code>degrees(x)</code> (C++20) – Đổi radian → độ, ví dụ: <code>degrees(π) = 180</code></li>
+    <li><code>radians(x)</code> (C++20) – Đổi độ → radian, ví dụ: <code>radians(180) = π</code></li>
+  </ul>
+
+  <hr>
+
+  <h3>🧷 IX. Một số hàm khác ít gặp</h3>
+  <ul>
+    <li><code>copysign(x, y)</code> – Trả về giá trị của x mang dấu của y</li>
+    <li><code>fdim(x, y)</code> – Phần dương của (x - y)</li>
+    <li><code>fmax(x, y)</code> – Lớn hơn trong hai số</li>
+    <li><code>fmin(x, y)</code> – Nhỏ hơn trong hai số</li>
+    <li><code>nextafter(x, y)</code> – Giá trị kế tiếp của x theo hướng y</li>
+    <li><code>nexttoward(x, y)</code> – Giống nextafter, chính xác hơn với long double</li>
+  </ul>
+
+       </details>
+</section>
+  
   
   <!-- ===== BẮT ĐẦU: BẢNG <iomanip> (một lệnh — một ví dụ — kết quả) ===== -->
 <section>
