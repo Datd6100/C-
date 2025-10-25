@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tổng hợp C++ cơ bản</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: #007acc;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    h2 {
+      color: #007acc;
+      border-left: 15px solid #007acc;
+      padding-left: 8px;
+    }
+    section {
+      background: #fff;
+      margin: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    code {
+  background: #eee;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: Consolas, monospace;
+  color: #000;
+}
+    pre {
+      background: #f4f4f4;
+      color: #000;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      font-family: Consolas, monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th {
+      background: #007acc;
+      color: white;
+      padding: 8px;
+    }
+    td {
+      padding: 8px;
+    }
+    b {
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📘 C++ Cơ Bản </h1>
+</header>
+
+<section>
+<details>
+  <summary><h2>1️⃣ Nhập / Xuất dữ liệu</h2></summary>
+  <table>
+    <tr><th>Lệnh</th><th>Chức năng</th><th>Ví dụ</th></tr>
+    <tr><td><code>#include &lt;iostream&gt;</code></td><td>Thư viện nhập/xuất</td><td></td></tr>
+    <tr><td><code>using namespace std;</code></td><td>Dùng <code>cin/cout</code> không cần <code>std::</code></td><td></td></tr>
+    <tr><td><code>cout</code></td><td>Xuất dữ liệu</td><td><code>cout &lt;&lt; "Hello\n";</code></td></tr>
+    <tr><td><code>cin</code></td><td>Nhập dữ liệu</td><td><code>cin &gt;&gt; x;</code></td></tr>
+  </table>
+  
+  <!-- 🔹 BỔ SUNG CHO PHẦN 1: Thư viện <iostream> -->
+<section>
+<details>
+  <summary><h3>📘 Mở rộng: Thư viện &lt;iostream&gt;</h3></summary>
+  <p>Thư viện <code>&lt;iostream&gt;</code> dùng để <strong>nhập và xuất dữ liệu</strong> trong C++. Bao gồm các đối tượng, toán tử và hàm xử lý luồng dữ liệu.</p>
+
+  <!-- 🧠 CIN -->
+  <h4>🔠 Hàm hữu ích của <code>cin</code></h4>
+  <table>
+    <thead>
+      <tr><th>Hàm</th><th>Công dụng</th><th>Ví dụ</th><th>Kết quả</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>cin &gt;&gt; var;</code></td>
+        <td>Nhập giá trị, bỏ qua khoảng trắng</td>
+        <td><code>int a; cin &gt;&gt; a;</code></td>
+        <td>Nhập “5” → <code>a = 5</code></td>
+      </tr>
+      <tr>
+        <td><code>getline(cin, s);</code></td>
+        <td>Đọc nguyên dòng (kể cả khoảng trắng)</td>
+        <td><code>string s; getline(cin, s);</code></td>
+        <td>Nhập “Hello world” → <code>s = "Hello world"</code></td>
+      </tr>
+      <tr>
+        <td><code>cin.ignore();</code></td>
+        <td>Bỏ qua 1 ký tự còn lại trong bộ đệm</td>
+        <td><code>cin.ignore(); getline(cin, s);</code></td>
+        <td>Tránh lỗi khi nhập chuỗi sau số</td>
+      </tr>
+      <tr>
+        <td><code>cin.peek();</code></td>
+        <td>Xem ký tự tiếp theo mà không lấy ra</td>
+        <td><code>char c = cin.peek();</code></td>
+        <td>Nếu nhập “A”, <code>c = 'A'</code> nhưng vẫn còn trong bộ đệm</td>
+      </tr>
+      <tr>
+        <td><code>cin.fail();</code></td>
+        <td>Kiểm tra nhập sai kiểu dữ liệu</td>
+        <td><code>if (cin.fail()) cout &lt;&lt; "Sai!";</code></td>
+        <td>Nhập chữ khi cần số → In “Sai!”</td>
+      </tr>
+      <tr>
+        <td><code>cin.clear();</code></td>
+        <td>Xoá trạng thái lỗi của <code>cin</code></td>
+        <td><code>cin.clear();</code></td>
+        <td>Khôi phục để nhập lại</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 🧩 COUT / CERR / CLOG -->
+  <h4>💬 Hàm và lệnh của <code>cout</code> / <code>cerr</code> / <code>clog</code></h4>
+  <table>
+    <thead>
+      <tr><th>Lệnh</th><th>Công dụng</th><th>Ví dụ</th><th>Kết quả</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>cout &lt;&lt; var;</code></td>
+        <td>In dữ liệu ra màn hình</td>
+        <td><code>cout &lt;&lt; "Hi";</code></td>
+        <td>Hi</td>
+      </tr>
+      <tr>
+        <td><code>cout.put('A');</code></td>
+        <td>In 1 ký tự</td>
+        <td><code>cout.put('A');</code></td>
+        <td>A</td>
+      </tr>
+      <tr>
+        <td><code>cout.write(s, n);</code></td>
+        <td>In n ký tự đầu tiên của chuỗi</td>
+        <td><code>cout.write("Hello", 3);</code></td>
+        <td>Hel</td>
+      </tr>
+      <tr>
+        <td><code>cout.flush();</code></td>
+        <td>Xả bộ đệm, in ngay nội dung</td>
+        <td><code>cout &lt;&lt; "Đang xử lý..." &lt;&lt; flush;</code></td>
+        <td>In ra ngay: “Đang xử lý...”</td>
+      </tr>
+      <tr>
+        <td><code>cerr &lt;&lt; "Lỗi!";</code></td>
+        <td>In lỗi (không đệm)</td>
+        <td><code>cerr &lt;&lt; "Lỗi!";</code></td>
+        <td>Xuất ra kênh lỗi (stderr)</td>
+      </tr>
+      <tr>
+        <td><code>clog &lt;&lt; "Ghi log...";</code></td>
+        <td>Ghi nhật ký (có đệm)</td>
+        <td><code>clog &lt;&lt; "Đang chạy...";</code></td>
+        <td>In log có thể trễ một chút</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 🎨 MANIPULATORS -->
+  <h4>🧮 Định dạng (Manipulators – cần &lt;iomanip&gt;)</h4>
+  <table>
+    <thead>
+      <tr><th>Lệnh</th><th>Công dụng</th><th>Ví dụ</th><th>Kết quả</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>endl</code></td>
+        <td>Xuống dòng + xả đệm</td>
+        <td><code>cout &lt;&lt; "Xin chao" &lt;&lt; endl;</code></td>
+        <td>Xin chao<br>(xuống dòng)</td>
+      </tr>
+      <tr>
+        <td><code>fixed</code></td>
+        <td>Hiển thị số thực dạng thập phân cố định</td>
+        <td><code>cout &lt;&lt; fixed &lt;&lt; 3.14;</code></td>
+        <td>3.140000</td>
+      </tr>
+      <tr>
+        <td><code>setprecision(n)</code></td>
+        <td>Giới hạn số chữ sau dấu phẩy</td>
+        <td><code>cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; 3.14159;</code></td>
+        <td>3.14</td>
+      </tr>
+      <tr>
+        <td><code>boolalpha</code></td>
+        <td>Hiển thị <code>true/false</code> thay vì <code>1/0</code></td>
+        <td><code>cout &lt;&lt; boolalpha &lt;&lt; true;</code></td>
+        <td>true</td>
+      </tr>
+      <tr>
+        <td><code>hex / dec / oct</code></td>
+        <td>Đổi hệ đếm in ra (16, 10, 8)</td>
+        <td><code>cout &lt;&lt; hex &lt;&lt; 255;</code></td>
+        <td>ff</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 💡 TỔNG KẾT -->
+  <h4>✅ Tóm tắt nhanh</h4>
+  <table>
+    <tr><td><strong>cin</strong></td><td>Nhập dữ liệu</td></tr>
+    <tr><td><strong>cout</strong></td><td>Xuất dữ liệu</td></tr>
+    <tr><td><strong>cerr</strong></td><td>In lỗi (không đệm)</td></tr>
+    <tr><td><strong>clog</strong></td><td>Ghi log (có đệm)</td></tr>
+    <tr><td><strong>&lt;&lt; / &gt;&gt;</strong></td><td>Toán tử nhập / xuất</td></tr>
+    <tr><td><strong>endl, fixed, setprecision...</strong></td><td>Định dạng hiển thị</td></tr>
+  </table>
+</details>
+</section>
+  
+</details>
+</section>
+
+
+
+<section>
+<details>
+  <summary><h2>2️⃣ Kiểu dữ liệu & Khai báo biến</h2></summary>
+  <table>
+    <tr><th>Kiểu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+    <tr><td><code>int</code></td><td>Số nguyên</td><td><code>int a = 10;</code></td></tr>
+    <tr><td><code>float</code></td><td>Số thực 4 byte</td><td><code>float x = 3.14;</code></td></tr>
+    <tr><td><code>double</code></td><td>Số thực 8 byte</td><td><code>double y = 2.718;</code></td></tr>
+    <tr><td><code>char</code></td><td>Ký tự</td><td><code>char c = 'A';</code></td></tr>
+    <tr><td><code>string</code></td><td>Chuỗi ký tự</td><td><code>string name = "Van";</code></td></tr>
+    <tr><td><code>bool</code></td><td>Đúng/Sai</td><td><code>bool ok = true;</code></td></tr>
+  </table>
+</details>
+</section>
+
+<section>
+    
+<details>
+  <summary><h2>🟢 1️⃣ Kiểu dữ liệu cơ bản (Primitive types)</h2></summary>
+  <table>
+    <tr><th>Kiểu</th><th>Ý nghĩa</th><th>Kích thước thường gặp</th><th>Ví dụ</th></tr>
+    <tr><td><code>int</code></td><td>Số nguyên</td><td>4 byte</td><td><code>int a = 10;</code></td></tr>
+    <tr><td><code>float</code></td><td>Số thực (độ chính xác đơn)</td><td>4 byte</td><td><code>float x = 3.14;</code></td></tr>
+    <tr><td><code>double</code></td><td>Số thực (độ chính xác kép)</td><td>8 byte</td><td><code>double y = 2.718;</code></td></tr>
+    <tr><td><code>char</code></td><td>1 ký tự</td><td>1 byte</td><td><code>char c = 'A';</code></td></tr>
+    <tr><td><code>bool</code></td><td>Đúng (true) / Sai (false)</td><td>1 byte</td><td><code>bool ok = true;</code></td></tr>
+    <tr><td><code>void</code></td><td>Không có giá trị (thường dùng cho hàm không trả về)</td><td>-</td><td><code>void ham() {}</code></td></tr>
+  </table>
+
+  <p><b>📌 Ngoài ra còn có biến thể của int:</b></p>
+  <ul>
+    <li><code>short int</code> (số nguyên ngắn, 2 byte)</li>
+    <li><code>long int</code> (số nguyên dài, 4-8 byte)</li>
+    <li><code>long long int</code> (số nguyên rất dài, 8 byte)</li>
+    <li><code>unsigned</code> (không dấu, chỉ ≥ 0, gấp đôi giá trị dương)</li>
+  </ul>
+
+  <pre><code>unsigned int x = 4000000000;  // số nguyên không dấu lớn</code></pre>
+
+<!-- ===== PHẦN: Kiểu int & các biến thể (BẢNG + ví dụ + kết quả) ===== -->
+<section>
+<details>
+<section>
+  <h3>🔢Các Kiểu <code>int</code> & các biến thể</h3>
+
+  <!-- I. Bảng các kiểu int cơ bản -->
+  <h3>🧩 I. CÁC KIỂU “INT” CƠ BẢN CHUẨN NGÔN NGỮ</h3>
+  <div style="overflow-x:auto; margin-bottom:12px;">
+    <table style="border-collapse:collapse; width:100%; min-width:820px;">
+      <thead style="background:#f2f6fb;">
+        <tr>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Kiểu dữ liệu</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Kích thước (thường)</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Phạm vi giá trị</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ghi chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">4 byte (phổ biến)</td>
+          <td style="border:1px solid #eee; padding:8px;">-2,147,483,648 → 2,147,483,647</td>
+          <td style="border:1px solid #eee; padding:8px;">Kiểu nguyên mặc định trên nhiều nền tảng (32-bit)</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>short int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">2 byte</td>
+          <td style="border:1px solid #eee; padding:8px;">-32,768 → 32,767</td>
+          <td style="border:1px solid #eee; padding:8px;">Dùng cho số nhỏ, tiết kiệm bộ nhớ</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>long int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">4 byte hoặc 8 byte (tùy nền tảng)</td>
+          <td style="border:1px solid #eee; padding:8px;">Nếu 4 byte: giống <code>int</code>. Nếu 8 byte: -9,223,372,036,854,775,808 → 9,223,372,036,854,775,807</td>
+          <td style="border:1px solid #eee; padding:8px;">Kích thước phụ thuộc ABI (Windows: thường 4; Linux x86_64: thường 8)</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>long long int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">8 byte</td>
+          <td style="border:1px solid #eee; padding:8px;">-9,223,372,036,854,775,808 → 9,223,372,036,854,775,807</td>
+          <td style="border:1px solid #eee; padding:8px;">Dùng khi cần vùng số rất lớn (C++11 đảm bảo ít nhất 64-bit)</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>unsigned int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">4 byte (phổ biến)</td>
+          <td style="border:1px solid #eee; padding:8px;">0 → 4,294,967,295</td>
+          <td style="border:1px solid #eee; padding:8px;">Chỉ chứa giá trị không âm</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>unsigned short int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">2 byte</td>
+          <td style="border:1px solid #eee; padding:8px;">0 → 65,535</td>
+          <td style="border:1px solid #eee; padding:8px;">Dùng cho số không âm nhỏ</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>unsigned long int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">4/8 byte</td>
+          <td style="border:1px solid #eee; padding:8px;">Nếu 4 byte: 0 → 4,294,967,295; nếu 8 byte: 0 → 18,446,744,073,709,551,615</td>
+          <td style="border:1px solid #eee; padding:8px;">Tương tự <code>long</code> nhưng không dấu</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>unsigned long long int</code></td>
+          <td style="border:1px solid #eee; padding:8px;">8 byte</td>
+          <td style="border:1px solid #eee; padding:8px;">0 → 18,446,744,073,709,551,615</td>
+          <td style="border:1px solid #eee; padding:8px;">Phạm vi rất lớn cho số dương (2^64-1)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Ví dụ: in kích thước và phạm vi bằng numeric_limits -->
+  <h4>🔍 Ví dụ: In kích thước & phạm vi (dùng <code>&lt;limits&gt;</code>)</h4>
+  <pre style="background:#f4f4f4; padding:10px; border-radius:6px; overflow-x:auto;"><code>#include &lt;iostream&gt;
+#include &lt;limits&gt;
+using namespace std;
+
+int main() {
+  cout &lt;&lt; "sizeof(int) = " &lt;&lt; sizeof(int) &lt;&lt; " bytes\n";
+  cout &lt;&lt; "int range: " &lt;&lt; numeric_limits&lt;int&gt;::min() &lt;&lt; " ... " &lt;&lt; numeric_limits&lt;int&gt;::max() &lt;&lt; endl;
+  cout &lt;&lt; "unsigned long long max = " &lt;&lt; numeric_limits&lt;unsigned long long&gt;::max() &lt;&lt; endl;
+  return 0;
+}</code></pre>
+  <p><strong>Kết quả (trên hệ phổ biến 64-bit Linux / Windows):</strong></p>
+  <pre style="background:#fffbe6; padding:8px; border-radius:6px; border:1px solid #ffdca8; overflow-x:auto;">
+sizeof(int) = 4 bytes
+int range: -2147483648 ... 2147483647
+unsigned long long max = 18446744073709551615
+  </pre>
+
+  <hr style="margin:16px 0;">
+
+  <!-- II. const / constexpr -->
+  <h3>🧱 II. BIẾN THỂ “KHÓA / CẤM SỬA” – <code>const</code>, <code>constexpr</code></h3>
+  <div style="overflow-x:auto; margin-bottom:12px;">
+    <table style="border-collapse:collapse; width:100%; min-width:760px;">
+      <thead style="background:#f2f6fb;">
+        <tr>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Từ khóa</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ý nghĩa</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ví dụ</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ghi chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>const</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Biến hằng, không thể thay đổi sau khi gán</td>
+          <td style="border:1px solid #eee; padding:8px;"><code>const int x = 10;</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Phổ biến; có thể là runtime-constant nếu được gán từ biến</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>constexpr</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Hằng được tính tại thời điểm biên dịch (compile-time)</td>
+          <td style="border:1px solid #eee; padding:8px;"><code>constexpr int y = 5 * 2;</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Bắt buộc là constant expression → dùng cho kích thước mảng, template</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>static const</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Hằng số có phạm vi file/module</td>
+          <td style="border:1px solid #eee; padding:8px;"><code>static const int MAX = 100;</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Thường dùng trong header/source để giới hạn phạm vi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>🔍 Ví dụ minh họa différence <code>const</code> vs <code>constexpr</code></h4>
+  <pre style="background:#f4f4f4; padding:10px; border-radius:6px; overflow-x:auto;"><code>#include &lt;iostream&gt;
+#include &lt;array&gt;
+using namespace std;
+
+const int A = 3;            // có thể là runtime constant
+constexpr int B = 4 * 2;    // compile-time constant
+
+int main() {
+  int arr1[A];              // (trong một số compiler cũ có thể báo lỗi) 
+  array&lt;int,B&gt; arr2;   // B chắc chắn là compile-time → hợp lệ
+  cout &lt;&lt; "A = " &lt;&lt; A &lt;&lt; ", B = " &lt;&lt; B &lt;&lt; endl;
+  return 0;
+}</code></pre>
+  <p><strong>Kết quả:</strong> <code>A = 3, B = 8</code></p>
+
+  <hr style="margin:16px 0;">
+
+  <!-- III. Storage class specifiers -->
+  <h3>⚙️ III. BIẾN THỂ “LƯU TRỮ / VỊ TRÍ” (Storage Class Specifiers)</h3>
+  <div style="overflow-x:auto; margin-bottom:12px;">
+    <table style="border-collapse:collapse; width:100%; min-width:760px;">
+      <thead style="background:#f2f6fb;">
+        <tr>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Từ khóa</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Tác dụng</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Phạm vi ảnh hưởng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>static</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Giữ giá trị giữa các lần gọi hàm (lifetime toàn bộ chương trình)</td>
+          <td style="border:1px solid #eee; padding:8px;">Biến cục bộ hoặc toàn cục</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>register</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Gợi ý lưu trong register CPU (không còn cần thiết hiện nay)</td>
+          <td style="border:1px solid #eee; padding:8px;">Biến cục bộ</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>extern</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Khai báo biến ở nơi khác (liên kết giữa các file .cpp)</td>
+          <td style="border:1px solid #eee; padding:8px;">Biến toàn cục (nhiều file)</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>thread_local</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Mỗi luồng có bản sao riêng của biến</td>
+          <td style="border:1px solid #eee; padding:8px;">Lập trình đa luồng</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>🔍 Ví dụ cho <code>static</code> và <code>thread_local</code></h4>
+  <pre style="background:#f4f4f4; padding:10px; border-radius:6px; overflow-x:auto;"><code>#include &lt;iostream&gt;
+using namespace std;
+
+void inc() {
+  static int counter = 0; // giữ giá trị giữa các lần gọi
+  cout &lt;&lt; "counter = " &lt;&lt; ++counter &lt;&lt; endl;
+}
+
+int main() {
+  inc(); // counter = 1
+  inc(); // counter = 2
+  inc(); // counter = 3
+  return 0;
+}</code></pre>
+  <p><strong>Kết quả:</strong></p>
+  <pre style="background:#fffbe6; padding:8px; border-radius:6px; border:1px solid #ffdca8; overflow-x:auto;">counter = 1
+counter = 2
+counter = 3</pre>
+
+  <hr style="margin:16px 0;">
+
+  <!-- IV. volatile / mutable -->
+  <h3>🔄 IV. BIẾN THỂ “TÍNH CHẤT BIÊN DỊCH / BỘ NHỚ”</h3>
+  <div style="overflow-x:auto; margin-bottom:12px;">
+    <table style="border-collapse:collapse; width:100%; min-width:760px;">
+      <thead style="background:#f2f6fb;">
+        <tr>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Từ khóa</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ý nghĩa</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ghi chú / Ứng dụng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #eee; padding:8px;"><code>volatile</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Báo cho compiler: biến có thể thay đổi ngoài chương trình</td>
+          <td style="border:1px solid #eee; padding:8px;">Dùng trong lập trình hệ thống, đọc giá trị phần cứng, ngăn compiler tối ưu hoá loại bỏ các lần đọc</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="border:1px solid #eee; padding:8px;"><code>mutable</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Cho phép thay đổi thành viên trong class ngay cả khi object là <code>const</code></td>
+          <td style="border:1px solid #eee; padding:8px;">Dùng cho cache, lazy-evaluation trong phương thức <code>const</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>🔍 Ví dụ <code>mutable</code> (thay đổi trong phương thức <code>const</code>)</h4>
+  <pre style="background:#f4f4f4; padding:10px; border-radius:6px; overflow-x:auto;"><code>#include &lt;iostream&gt;
+using namespace std;
+
+struct Item {
+  mutable int cache = 0;
+  int get() const {
+    cache++; // hợp lệ vì cache là mutable
+    return cache;
+  }
+};
+
+int main() {
+  const Item it;
+  cout &lt;&lt; it.get() &lt;&lt; endl; // 1
+  cout &lt;&lt; it.get() &lt;&lt; endl; // 2
+  return 0;
+}</code></pre>
+  <p><strong>Kết quả:</strong> <code>1</code> và <code>2</code></p>
+
+  <hr style="margin:16px 0;">
+
+  <!-- V. cstdint -->
+  <h3>🧮 V. CÁC KIỂU “INT ĐẶC BIỆT” TRONG <code>&lt;cstdint&gt;</code> (C++11+)</h3>
+  <p>Thư viện <code>&lt;cstdint&gt;</code> định nghĩa các kiểu có **kích thước chính xác** — rất hữu ích khi lập trình hệ thống, mạng, nhúng.</p>
+
+  <div style="overflow-x:auto; margin-bottom:12px;">
+    <table style="border-collapse:collapse; width:100%; min-width:820px;">
+      <thead style="background:#f2f6fb;">
+        <tr>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Kiểu</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Kích thước</th>
+          <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ghi chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #eee; padding:8px;"><code>int8_t / uint8_t</code></td><td style="border:1px solid #eee; padding:8px;">1 byte</td><td style="border:1px solid #eee; padding:8px;">Tương đương signed/unsigned char</td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;"><code>int16_t / uint16_t</code></td><td style="border:1px solid #eee; padding:8px;">2 byte</td><td style="border:1px solid #eee; padding:8px;">Tương đương short</td></tr>
+        <tr><td style="border:1px solid #eee; padding:8px;"><code>int32_t / uint32_t</code></td><td style="border:1px solid #eee; padding:8px;">4 byte</td><td style="border:1px solid #eee; padding:8px;">Tương đương int (trên nhiều hệ)</td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;"><code>int64_t / uint64_t</code></td><td style="border:1px solid #eee; padding:8px;">8 byte</td><td style="border:1px solid #eee; padding:8px;">Tương đương long long</td></tr>
+        <tr><td style="border:1px solid #eee; padding:8px;"><code>intptr_t / uintptr_t</code></td><td style="border:1px solid #eee; padding:8px;">Tùy nền tảng</td><td style="border:1px solid #eee; padding:8px;">Đủ lớn để chứa pointer (dùng khi cần chuyển đổi giữa con trỏ và số)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>🔍 Ví dụ dùng <code>&lt;cstdint&gt;</code> và <code>&lt;limits&gt;</code></h4>
+  <pre style="background:#f4f4f4; padding:10px; border-radius:6px; overflow-x:auto;"><code>#include &lt;iostream&gt;
+#include &lt;cstdint&gt;
+#include &lt;limits&gt;
+using namespace std;
+
+int main() {
+  cout &lt;&lt; "int32_t size = " &lt;&lt; sizeof(int32_t) &lt;&lt; " bytes, range: "
+       &lt;&lt; numeric_limits&lt;int32_t&gt;::min() &lt;&lt; " ... " &lt;&lt; numeric_limits&lt;int32_t&gt;::max() &lt;&lt; endl;
+  cout &lt;&lt; "uint64_t max = " &lt;&lt; numeric_limits&lt;uint64_t&gt;::max() &lt;&lt; endl;
+  return 0;
+}</code></pre>
+  <p><strong>Kết quả:</strong></p>
+  <pre style="background:#fffbe6; padding:8px; border-radius:6px; border:1px solid #ffdca8; overflow-x:auto;">
+int32_t size = 4 bytes, range: -2147483648 ... 2147483647
+uint64_t max = 18446744073709551615
+  </pre>
+
+  <hr style="margin:16px 0;">
+
+  <!-- VI. Các biến thể kết hợp -->
+  <h3>🧠 VI. CÁC BIẾN THỂ KẾT HỢP (phổ biến)</h3>
+  <div style="overflow-x:auto; margin-bottom:12px;">
+    <table style="border-collapse:collapse; width:100%; min-width:760px;">
+      <thead style="background:#f2f6fb;">
+        <tr><th>Ví dụ</th><th>Ý nghĩa / Công dụng</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #eee; padding:8px;"><code>const unsigned int SIZE = 100;</code></td><td style="border:1px solid #eee; padding:8px;">Hằng số không dấu</td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;"><code>static long long counter = 0;</code></td><td style="border:1px solid #eee; padding:8px;">Biến toàn cục tồn tại suốt chương trình</td></tr>
+        <tr><td style="border:1px solid #eee; padding:8px;"><code>constexpr unsigned long MAX = 5000;</code></td><td style="border:1px solid #eee; padding:8px;">Giá trị xác định tại thời điểm biên dịch</td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;"><code>volatile int sensorValue;</code></td><td style="border:1px solid #eee; padding:8px;">Biến có thể thay đổi từ phần cứng/ngoài chương trình</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>🔍 Ví dụ kết hợp</h4>
+  <pre style="background:#f4f4f4; padding:10px; border-radius:6px; overflow-x:auto;"><code>#include &lt;iostream&gt;
+#include &lt;cstdint&gt;
+using namespace std;
+
+constexpr unsigned long MAX = 5000;
+static long long counter = 0;
+volatile int sensorValue; // ví dụ: giá trị do phần cứng cập nhật
+
+int main() {
+  counter++;
+  cout &lt;&lt; "counter = " &lt;&lt; counter &lt;&lt; ", MAX = " &lt;&lt; MAX &lt;&lt; endl;
+  return 0;
+}</code></pre>
+  <p><strong>Kết quả:</strong> <code>counter = 1, MAX = 5000</code></p>
+
+  <hr style="margin:16px 0;">
+
+  <!-- VII. Tổng kết -->
+  <h3>🧾 VII. Tổng kết nhanh</h3>
+  <div style="overflow-x:auto;">
+    <table style="border-collapse:collapse; width:100%; min-width:760px;">
+      <thead style="background:#f2f6fb;">
+        <tr><th>Nhóm</th><th>Mục đích</th><th>Ví dụ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="border:1px solid #eee; padding:8px;">Kiểu cơ bản</td><td style="border:1px solid #eee; padding:8px;">int, short, long</td><td style="border:1px solid #eee; padding:8px;"><code>int a = 10;</code></td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;">Chỉ dương</td><td style="border:1px solid #eee; padding:8px;">unsigned</td><td style="border:1px solid #eee; padding:8px;"><code>unsigned int u = 5;</code></td></tr>
+        <tr><td style="border:1px solid #eee; padding:8px;">Cấm sửa</td><td style="border:1px solid #eee; padding:8px;">const, constexpr</td><td style="border:1px solid #eee; padding:8px;"><code>constexpr int N = 10;</code></td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;">Giữ lâu</td><td style="border:1px solid #eee; padding:8px;">static</td><td style="border:1px solid #eee; padding:8px;"><code>static int n = 0;</code></td></tr>
+        <tr><td style="border:1px solid #eee; padding:8px;">Biến toàn cục giữa file</td><td style="border:1px solid #eee; padding:8px;">extern</td><td style="border:1px solid #eee; padding:8px;"><code>extern int g;</code></td></tr>
+        <tr style="background:#fafafa;"><td style="border:1px solid #eee; padding:8px;">Kích thước chính xác</td><td style="border:1px solid #eee; padding:8px;"><code>&lt;cstdint&gt;</code></td><td style="border:1px solid #eee; padding:8px;"><code>int32_t, uint64_t</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:12px;"><strong>Ghi chú cuối:</strong>  
+  - Nếu bạn muốn đảm bảo kích thước chính xác (ví dụ khi làm mạng, nhúng), hãy dùng <code>&lt;cstdint&gt;</code>.  
+  - Dùng <code>constexpr</code> cho hằng số cần tính tại compile-time (tối ưu).  
+  - Tránh dùng <code>register</code> trong code hiện đại — compiler tự tối ưu tốt hơn.</p>
+
+</section>
+</section>
+  </details>
+<!-- ===== KẾT THÚC PHẦN ===== -->
+
+</section>
+  </details>
+  
+<section>
+<details>
+  <summary><h2>🟢 2️⃣ Kiểu dữ liệu phức hợp (Composite types)</h2></summary>
+  <table>
+    <tr><th>Kiểu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+    <tr><td>Array (mảng)</td><td>Nhiều phần tử cùng kiểu, lưu liên tiếp</td><td><code>int a[5] = {1,2,3,4,5};</code></td></tr>
+    <tr><td>String (chuỗi)</td><td>Dãy ký tự, cần &lt;string&gt;</td><td><code>string name = "Van Do";</code></td></tr>
+    <tr><td>Pointer (con trỏ)</td><td>Lưu địa chỉ bộ nhớ</td><td><code>int *p = &amp;a;</code></td></tr>
+    <tr><td>Reference (tham chiếu)</td><td>Tên khác của biến</td><td><code>int &amp;ref = a;</code></td></tr>
+  </table>
+  
+  <section>
+  <style>
+    .comp-table-wrap { overflow-x:auto; margin:12px 0; }
+    .comp-table {
+      width:100%;
+      min-width:1100px;
+      border-collapse:collapse;
+      font-size:14px;
+      font-family: Arial, sans-serif;
+    }
+    .comp-table th, .comp-table td {
+      border:1px solid #ddd;
+      padding:8px 10px;
+      vertical-align:top;
+      text-align:left;
+    }
+    .comp-table thead th {
+      background:#0b76c2;
+      color:#fff;
+    }
+    .comp-table tbody tr:nth-child(even) { background:#fbfdff; }
+    code.inline { background:#f3f3f3; padding:2px 6px; border-radius:4px; font-family:Consolas,monospace; font-size:13px; }
+    pre.small { background:#f7f7f7; padding:8px; border-radius:6px; overflow-x:auto; font-family:Consolas,monospace; font-size:13px; }
+  </style>
+<details>
+  <h2>🧩 Composite Types — Tổng hợp</h2>
+  <p style="margin:0 0 8px 0; color:#444;">Bảng liệt kê công dụng, chú thích chi tiết và ví dụ ngắn cho từng kiểu phức hợp trong C++.</p>
+
+  <div class="comp-table-wrap">
+    <table class="comp-table" role="table">
+      <thead>
+        <tr>
+          <th style="width:14%;">Kiểu</th>
+          <th style="width:22%;">Công dụng</th>
+          <th style="width:30%;">Chú thích chi tiết</th>
+          <th style="width:18%;">Ví dụ (1 lệnh)</th>
+          <th style="width:16%;">Kết quả</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><strong>Con trỏ (Pointer)</strong><br><code class="inline">T*</code></td>
+          <td>Lưu địa chỉ biến khác</td>
+          <td>&amp; lấy địa chỉ; * giải tham chiếu để truy cập giá trị; dùng <code>nullptr</code> cho pointer rỗng.</td>
+          <td><code class="inline">int x=10; int* p=&amp;x; cout &lt;&lt; *p;</code></td>
+          <td><code class="inline">10</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Tham chiếu (Reference)</strong><br><code class="inline">T&amp;</code></td>
+          <td>Bí danh cho biến (alias), tránh sao chép khi truyền tham số</td>
+          <td>Phải khởi tạo ngay; không thể thay đổi để trỏ sang biến khác sau khi khởi tạo.</td>
+          <td><code class="inline">int a=5; int&amp; b=a; b=10; cout &lt;&lt; a;</code></td>
+          <td><code class="inline">10</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Mảng (Array)</strong><br><code class="inline">T arr[N]</code></td>
+          <td>Lưu dãy phần tử cùng kiểu, kích thước cố định</td>
+          <td>Index bắt đầu 0; C++11 có <code>std::array&lt;T,N&gt;</code> an toàn hơn.</td>
+          <td><code class="inline">int arr[3]={1,2,3}; cout &lt;&lt; arr[0];</code></td>
+          <td><code class="inline">1</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Chuỗi C (C-string)</strong><br><code class="inline">char[]</code></td>
+          <td>Lưu chuỗi ký tự kết thúc bằng '\0'</td>
+          <td>Thích hợp cho tương tác C-style; cần chú ý tràn bộ nhớ nếu không đủ kích thước.</td>
+          <td><code class="inline">char s[]="Van"; cout &lt;&lt; s;</code></td>
+          <td><code class="inline">Van</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Chuỗi (std::string)</strong><br><code class="inline">std::string</code></td>
+          <td>Chuỗi hiện đại, thao tác dễ (length, substr, find,...)</td>
+          <td>Cần <code>#include &lt;string&gt;</code>; tự quản lý bộ nhớ, an toàn hơn char[].</td>
+          <td><code class="inline">std::string s="Van Do"; cout &lt;&lt; s;</code></td>
+          <td><code class="inline">Van Do</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Struct</strong><br><code class="inline">struct Name { ... };</code></td>
+          <td>Nhóm nhiều biến khác kiểu thành 1 đối tượng dữ liệu</td>
+          <td>Thành viên mặc định là <code>public</code>; thường dùng để mô tả record (sinh viên, điểm...).</td>
+          <td><code class="inline">struct S{std::string n;int a;}; S s{"An",18}; cout &lt;&lt; s.n;</code></td>
+          <td><code class="inline">An</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Class</strong><br><code class="inline">class Name { ... };</code></td>
+          <td>Định nghĩa kiểu OOP: dữ liệu + phương thức</td>
+          <td>Mặc định thành viên là <code>private</code>; hỗ trợ đóng gói, kế thừa, đa hình.</td>
+          <td><code class="inline">class A{public:string n;}; A a; a.n="Lan"; cout &lt;&lt; a.n;</code></td>
+          <td><code class="inline">Lan</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Union</strong><br><code class="inline">union Name { ... };</code></td>
+          <td>Chia sẻ cùng vùng nhớ cho nhiều thành viên (tiết kiệm RAM)</td>
+          <td>Tại 1 thời điểm chỉ 1 thành viên hợp lệ; phải cẩn trọng khi đọc thành viên khác thành viên đang ghi.</td>
+          <td><code class="inline">union D{int i; char c;}; D d; d.i=65; cout &lt;&lt; d.i &lt;&lt; ' ' &lt;&lt; d.c;</code></td>
+          <td><code class="inline">65 A</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Enum</strong><br><code class="inline">enum / enum class</code></td>
+          <td>Định nghĩa tập giá trị cố định có tên</td>
+          <td><code>enum</code> cũ cho phép convert ngầm → int; <code>enum class</code> (C++11) an toàn hơn (phải dùng <code>Color::RED</code>).</td>
+          <td><code class="inline">enum C{RED,GREEN}; C c=GREEN; cout &lt;&lt; c;</code></td>
+          <td><code class="inline">1</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>std::pair</strong><br><code class="inline">pair&lt;T1,T2&gt;</code></td>
+          <td>Lưu 2 giá trị có thể khác kiểu</td>
+          <td>Dễ dùng khi trả về 2 giá trị từ hàm hoặc làm key-value tạm thời.</td>
+          <td><code class="inline">std::pair&lt;int,string&gt;p={1,"An"}; cout &lt;&lt; p.first &lt;&lt; "-" &lt;&lt; p.second;</code></td>
+          <td><code class="inline">1-An</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>std::tuple</strong><br><code class="inline">tuple&lt;...&gt;</code></td>
+          <td>Lưu nhiều giá trị khác kiểu (3+)</td>
+          <td>Dùng <code>std::get&lt;i&gt;(t)</code> để truy xuất; hữu ích khi trả nhiều giá trị khác kiểu.</td>
+          <td><code class="inline">auto t=std::make_tuple(1,"Lan",9.5); cout &lt;&lt; std::get&lt;1&gt;(t);</code></td>
+          <td><code class="inline">Lan</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>std::vector</strong><br><code class="inline">vector&lt;T&gt;</code></td>
+          <td>Mảng động, kích thước thay đổi</td>
+          <td>Hỗ trợ <code>push_back</code>, <code>size</code>, iterator; dùng phổ biến thay cho mảng thô.</td>
+          <td><code class="inline">std::vector&lt;int&gt; v={1,2,3}; v.push_back(4); cout &lt;&lt; v[3];</code></td>
+          <td><code class="inline">4</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>std::map</strong><br><code class="inline">map&lt;K,V&gt;</code></td>
+          <td>Bản đồ (key→value), sắp xếp theo key</td>
+          <td>Truy cập bằng <code>operator[]</code>; tìm kiếm log(n) vì dùng cây cân bằng.</td>
+          <td><code class="inline">std::map&lt;string,int&gt;m; m["An"]=18; cout &lt;&lt; m["An"];</code></td>
+          <td><code class="inline">18</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>std::set</strong><br><code class="inline">set&lt;T&gt;</code></td>
+          <td>Tập hợp các phần tử duy nhất, sắp xếp</td>
+          <td>Không cho phép trùng lặp; tìm kiếm, chèn đều log(n).</td>
+          <td><code class="inline">std::set&lt;int&gt;s={1,2}; cout &lt;&lt; s.count(2);</code></td>
+          <td><code class="inline">1</code></td>
+        </tr>
+
+        <tr>
+          <td><strong>Struct/Classes lồng nhau</strong></td>
+          <td>Cho phép tổ chức dữ liệu phức tạp, nested types</td>
+          <td>Hữu ích khi mô tả đối tượng có cấu trúc phức tạp (ví dụ trường học chứa học sinh).</td>
+          <td><code class="inline">struct School{std::string name; struct Student{std::string n;int a; } stu; }; School s; s.stu.n="Y"; cout &lt;&lt; s.stu.n;</code></td>
+          <td><code class="inline">Y</code></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:10px;"><strong>Ghi chú:</strong> các ví dụ ngắn trên giả định đã <code>#include</code> các header cần thiết (ví dụ <code>&lt;iostream&gt;</code>, <code>&lt;string&gt;</code>, <code>&lt;vector&gt;</code>, <code>&lt;map&gt;</code>, <code>&lt;tuple&gt;</code>, <code>&lt;utility&gt;</code>) và sử dụng <code>std::</code> hoặc <code>using namespace std;</code>.</p>
+  </details>
+</section>
+  
+  </details>
+</section>
+
+<section>
+     <details>
+   <summary><h2>3️⃣ Toán tử cơ bản</h2> </summary>
+  <table>
+    <tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th><th>Kết quả</th></tr>
+    <tr><td><code>=</code></td><td>Gán giá trị</td><td><code>x = 5;</code></td><td><code>x = 5</code></td></tr>
+    <tr><td><code>+=</code></td><td>Cộng và gán</td><td><code>x += 3;</code></td><td><code>x = x + 3</code></td></tr>
+    <tr><td><code>-=</code></td><td>Trừ và gán</td><td><code>x -= 2;</code></td><td><code>x = x - 2</code></td></tr>
+    <tr><td><code>*=</code></td><td>Nhân và gán</td><td><code>x *= 4;</code></td><td><code>x = x * 4</code></td></tr>
+    <tr><td><code>/=</code></td><td>Chia và gán</td><td><code>x /= 2;</code></td><td><code>x = x / 2</code></td></tr>
+    <tr><td><code>%=</code></td><td>Lấy dư và gán</td><td><code>x %= 3;</code></td><td><code>x = x % 3</code></td></tr>
+  </table>
+  
+  <section>
+       <details>
+   <summary><h3>🧮 Chi tiết Toán tử trong C++</h3> </summary>
+  <p><b>Một lệnh → Công dụng → Ví dụ → Kết quả / Giải thích</b></p>
+
+  <div style="overflow-x:auto;">
+    <table style="border-collapse:collapse; width:100%; background:#f9fafb; border:1px solid #ccc;">
+      <thead style="background:#007acc; color:#fff;">
+        <tr>
+          <th>Toán tử</th>
+          <th>Công dụng</th>
+          <th>Ví dụ</th>
+          <th>Kết quả / Giải thích</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- I. GÁN -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>I. Toán tử gán</b></td></tr>
+        <tr><td><code>=</code></td><td>Gán giá trị</td><td><code>x = 5;</code></td><td>x nhận giá trị 5</td></tr>
+        <tr><td><code>+=</code></td><td>Cộng rồi gán</td><td><code>x += 3;</code></td><td>x = x + 3</td></tr>
+        <tr><td><code>-=</code></td><td>Trừ rồi gán</td><td><code>x -= 2;</code></td><td>x = x - 2</td></tr>
+        <tr><td><code>*=</code></td><td>Nhân rồi gán</td><td><code>x *= 4;</code></td><td>x = x * 4</td></tr>
+        <tr><td><code>/=</code></td><td>Chia rồi gán</td><td><code>x /= 2;</code></td><td>x = x / 2</td></tr>
+        <tr><td><code>%=</code></td><td>Chia lấy dư rồi gán</td><td><code>x %= 3;</code></td><td>x = x % 3</td></tr>
+
+        <!-- II. SỐ HỌC -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>II. Toán tử số học</b></td></tr>
+        <tr><td><code>+</code></td><td>Cộng</td><td><code>3 + 2</code></td><td>5</td></tr>
+        <tr><td><code>-</code></td><td>Trừ</td><td><code>3 - 2</code></td><td>1</td></tr>
+        <tr><td><code>*</code></td><td>Nhân</td><td><code>3 * 2</code></td><td>6</td></tr>
+        <tr><td><code>/</code></td><td>Chia</td><td><code>5 / 2</code></td><td>2 (vì là chia nguyên)</td></tr>
+        <tr><td><code>%</code></td><td>Lấy dư</td><td><code>5 % 2</code></td><td>1</td></tr>
+        <tr><td><code>++</code></td><td>Tăng 1</td><td><code>x++</code> hoặc <code>++x</code></td><td>x tăng 1 (hậu/tăng trước)</td></tr>
+        <tr><td><code>--</code></td><td>Giảm 1</td><td><code>x--</code> hoặc <code>--x</code></td><td>x giảm 1</td></tr>
+
+        <!-- III. SO SÁNH -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>III. Toán tử so sánh</b></td></tr>
+        <tr><td><code>==</code></td><td>Bằng</td><td><code>3 == 3</code></td><td>true</td></tr>
+        <tr><td><code>!=</code></td><td>Khác</td><td><code>3 != 4</code></td><td>true</td></tr>
+        <tr><td><code>></code></td><td>Lớn hơn</td><td><code>5 > 2</code></td><td>true</td></tr>
+        <tr><td><code><</code></td><td>Nhỏ hơn</td><td><code>2 < 5</code></td><td>true</td></tr>
+        <tr><td><code>>=</code></td><td>Lớn hơn hoặc bằng</td><td><code>5 >= 5</code></td><td>true</td></tr>
+        <tr><td><code><=</code></td><td>Nhỏ hơn hoặc bằng</td><td><code>3 <= 4</code></td><td>true</td></tr>
+
+        <!-- IV. LOGIC -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>IV. Toán tử logic</b></td></tr>
+        <tr><td><code>&&</code></td><td>AND (và)</td><td><code>a > 0 && b > 0</code></td><td>Đúng nếu cả hai đúng</td></tr>
+        <tr><td><code>||</code></td><td>OR (hoặc)</td><td><code>a > 0 || b > 0</code></td><td>Đúng nếu ít nhất 1 đúng</td></tr>
+        <tr><td><code>!</code></td><td>NOT (phủ định)</td><td><code>!(a > 0)</code></td><td>Đảo ngược giá trị logic</td></tr>
+
+        <!-- V. BITWISE -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>V. Toán tử bit</b></td></tr>
+        <tr><td><code>&</code></td><td>AND bit</td><td><code>5 & 3</code></td><td>1</td></tr>
+        <tr><td><code>|</code></td><td>OR bit</td><td><code>5 | 3</code></td><td>7</td></tr>
+        <tr><td><code>^</code></td><td>XOR bit</td><td><code>5 ^ 3</code></td><td>6</td></tr>
+        <tr><td><code>~</code></td><td>NOT bit</td><td><code>~5</code></td><td>-6 (bù 2)</td></tr>
+        <tr><td><code><<</code></td><td>Dịch trái</td><td><code>5 << 1</code></td><td>10</td></tr>
+        <tr><td><code>>></code></td><td>Dịch phải</td><td><code>5 >> 1</code></td><td>2</td></tr>
+
+        <!-- VI. TERNARY -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>VI. Toán tử điều kiện</b></td></tr>
+        <tr><td><code>? :</code></td><td>Điều kiện ngắn gọn</td>
+          <td><code>(a > b) ? a : b;</code></td><td>Nếu đúng chọn a , sai chọn b </td></tr>
+
+        <!-- VII. STRING -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>VII. Toán tử chuỗi</b></td></tr>
+        <tr><td><code>+</code></td><td>Nối chuỗi</td><td><code>"Xin " + "chào"</code></td><td>Xin chào</td></tr>
+        <tr><td><code>+=</code></td><td>Thêm chuỗi vào cuối</td><td><code>s += " bạn!";</code></td><td>"Xin chào bạn!"</td></tr>
+        <tr><td><code>==, !=, <, ></code></td><td>So sánh chuỗi</td><td><code>"abc" < "xyz"</code></td><td>true</td></tr>
+
+        <!-- VIII. POINTER -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>VIII. Toán tử con trỏ</b></td></tr>
+        <tr><td><code>&</code></td><td>Lấy địa chỉ biến</td><td><code>&x</code></td><td>Trả về địa chỉ của x</td></tr>
+        <tr><td><code>*</code></td><td>Giải tham chiếu</td><td><code>*ptr</code></td><td>Truy cập giá trị tại địa chỉ</td></tr>
+
+        <!-- IX. PHẠM VI -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>IX. Toán tử phạm vi (::)</b></td></tr>
+        <tr><td><code>::</code></td><td>Truy cập phạm vi namespace/class</td>
+          <td><code>A::value</code></td><td>Dùng giá trị trong namespace A</td></tr>
+
+        <!-- X. KHÁC -->
+        <tr><td colspan="4" style="background:#e3f2fd;"><b>X. Toán tử khác</b></td></tr>
+        <tr><td><code>sizeof</code></td><td>Kích thước kiểu dữ liệu</td><td><code>sizeof(int)</code></td><td>4 (thường)</td></tr>
+        <tr><td><code>typeid</code></td><td>Thông tin kiểu dữ liệu</td><td><code>typeid(x).name()</code></td><td>"i" (nếu int)</td></tr>
+        <tr><td><code>,</code></td><td>Thực hiện tuần tự</td><td><code>(x=5, y=6)</code></td><td>Trả về y</td></tr>
+        <tr><td><code>-></code></td><td>Truy cập thành phần qua con trỏ</td><td><code>ptr->name</code></td><td>Giá trị của member name</td></tr>
+        <tr><td><code>.</code></td><td>Truy cập thành phần đối tượng</td><td><code>obj.name</code></td><td>Truy cập member</td></tr>
+        <tr><td><code>[]</code></td><td>Truy cập phần tử mảng</td><td><code>arr[0]</code></td><td>Phần tử đầu tiên</td></tr>
+        <tr><td><code>()</code></td><td>Gọi hàm</td><td><code>sum(a,b)</code></td><td>Thực thi hàm</td></tr>
+        <tr><td><code>new</code></td><td>Cấp phát động</td><td><code>int* p = new int;</code></td><td>Tạo biến trên heap</td></tr>
+        <tr><td><code>delete</code></td><td>Giải phóng bộ nhớ</td><td><code>delete p;</code></td><td>Trả vùng nhớ cho hệ thống</td></tr>
+      </tbody>
+    </table>
+  </div>
+   </details>
+</section>
+  
+    </details>
+</section>
+
+<section>
+     <details>
+   <summary><h2>4️⃣ Cấu trúc điều kiện</h2> </summary>
+  <p>👉 Dùng để rẽ nhánh chương trình dựa trên điều kiện đúng/sai.</p>
+  
+  <b>Ví dụ if - else:</b>
+  <pre><code>int x;
+cin &gt;&gt; x;
+if (x &gt; 0) 
+  cout &lt;&lt; "Số dương";
+else if (x == 0)
+  cout &lt;&lt; "Số 0";
+else 
+  cout &lt;&lt; "Số âm";</code></pre>
+
+  <b>Ví dụ switch - case:</b>
+  <pre><code>int n;
+cin &gt;&gt; n;
+switch (n) {
+  case 1: cout &lt;&lt; "Một"; break;
+  case 2: cout &lt;&lt; "Hai"; break;
+  case 3: cout &lt;&lt; "Ba"; break;
+  default: cout &lt;&lt; "Khác";
+}</code></pre>
+
+<!-- Một dòng HTML: Bảng "II. Toàn bộ các loại cấu trúc điều kiện trong C++" -->
+<section>
+ <details>
+<div style="overflow-x:auto; margin:12px 0;">
+  <table style="width:100%; min-width:1100px; border-collapse:collapse; font-family:Arial, sans-serif; font-size:14px;">
+    <thead style="background:#0b76c2; color:#fff;">
+      <tr>
+        <th style="padding:8px; border:1px solid #ccc; width:4%;">STT</th>
+        <th style="padding:8px; border:1px solid #ccc; width:20%;">Tên cấu trúc</th>
+        <th style="padding:8px; border:1px solid #ccc; width:28%;">Cú pháp</th>
+        <th style="padding:8px; border:1px solid #ccc; width:18%;">Chức năng</th>
+        <th style="padding:8px; border:1px solid #ccc; width:30%;">Chú thích chi tiết • Ví dụ (1 lệnh) • Kết quả</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fbfdff;">
+        <td style="padding:8px; border:1px solid #eee;">1️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>if</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (điều_kiện) { ... }</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Thực hiện khi điều kiện đúng</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Cú pháp cơ bản; dùng cho một nhánh.<br>
+          <strong>Ví dụ:</strong> <code>if (x &gt; 0) cout &lt;&lt; "Pos";</code><br>
+          <strong>Kết quả:</strong> In <code>Pos</code> nếu <code>x &gt; 0</code>.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:8px; border:1px solid #eee;">2️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>if - else</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (...) { ... } else { ... }</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Hai nhánh lựa chọn</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Nếu điều kiện sai thì thực thi nhánh <code>else</code>.<br>
+          <strong>Ví dụ:</strong> <code>if (x%2==0) cout &lt;&lt; "Even"; else cout &lt;&lt; "Odd";</code><br>
+          <strong>Kết quả:</strong> In <code>Even</code> hoặc <code>Odd</code> tuỳ <code>x</code>.
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:8px; border:1px solid #eee;">3️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>if - else if - else</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (...) ... else if (...) ... else ...</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Nhiều điều kiện nối tiếp</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Kiểm tra tuần tự; dừng ở nhánh đầu đúng.<br>
+          <strong>Ví dụ:</strong> <code>if(n==1) cout &lt;&lt; "1"; else if(n==2) cout &lt;&lt; "2"; else cout &lt;&lt; "Other";</code><br>
+          <strong>Kết quả:</strong> In giá trị tương ứng hoặc <code>Other</code>.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:8px; border:1px solid #eee;">4️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>Toán tử 3 ngôi (?:)</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>(cond) ? expr_true : expr_false;</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Cấu trúc điều kiện rút gọn</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Dùng trong biểu thức, tiện cho gán nhanh.<br>
+          <strong>Ví dụ:</strong> <code>int m = (a &gt; b) ? a : b;</code><br>
+          <strong>Kết quả:</strong> <code>m</code> là giá trị lớn hơn.
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:8px; border:1px solid #eee;">5️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>switch - case</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>switch(expr) { case x: ...; break; default: ... }</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Rẽ nhánh theo giá trị nguyên</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Thường dùng với int/enum; nhớ <code>break</code> để tránh fall-through (trừ khi muốn).<br>
+          <strong>Ví dụ:</strong> <code>switch(n){case 1: cout &lt;&lt; "1"; break; default: cout &lt;&lt; "?";}</code><br>
+          <strong>Kết quả:</strong> In <code>1</code> khi <code>n==1</code>, else <code>?</code>.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:8px; border:1px solid #eee;">6️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>Lồng điều kiện</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (...) { if (...) {...} }</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Điều kiện trong điều kiện</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Dùng khi muốn kiểm tra nhiều cấp độ điều kiện.<br>
+          <strong>Ví dụ:</strong> <code>if (a&gt;0) if (b&gt;0) cout &lt;&lt; "both";</code><br>
+          <strong>Kết quả:</strong> In <code>both</code> khi cả <code>a</code> và <code>b</code> dương.
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:8px; border:1px solid #eee;">7️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>return có điều kiện</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (cond) return x; else return y;</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Dừng hàm theo điều kiện</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Thường dùng để thoát sớm khi điều kiện không hợp lệ.<br>
+          <strong>Ví dụ:</strong> <code>if (x &lt; 0) return -1; else return 0;</code><br>
+          <strong>Kết quả:</strong> Hàm trả <code>-1</code> nếu <code>x&lt;0</code>, else <code>0</code>.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:8px; border:1px solid #eee;">8️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>goto + label</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if(...) goto label;</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Nhảy đến vị trí chỉ định (hiếm dùng)</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Cổ điển, dễ gây khó đọc/bug, tránh dùng nếu không cần thiết.<br>
+          <strong>Ví dụ:</strong> <code>if(err) goto end; /*...*/ end: cout &lt;&lt; "done";</code><br>
+          <strong>Kết quả:</strong> Nếu <code>err</code> true → nhảy tới nhãn <code>end</code>.
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:8px; border:1px solid #eee;">9️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>Cấu trúc với toán tử logic</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (a &gt; 0 && b &gt; 0)</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Kết hợp nhiều điều kiện</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Hỗ trợ && (AND), || (OR). Lưu ý short-circuit.<br>
+          <strong>Ví dụ:</strong> <code>if (a &gt; 0 &amp;&amp; b &gt; 0) cout &lt;&lt; "ok";</code><br>
+          <strong>Kết quả:</strong> In <code>ok</code> khi cả hai đúng.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:8px; border:1px solid #eee;">🔟</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>Static if (C++20)</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if constexpr (điều_kiện_compile) { ... }</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Kiểm tra tại thời điểm biên dịch</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Thực thi hoặc bỏ đoạn mã ở compile-time; hữu ích trong generic programming.<br>
+          <strong>Ví dụ:</strong> <code>if constexpr (sizeof(int)==4) cout &lt;&lt; "32-bit int";</code><br>
+          <strong>Kết quả:</strong> Biểu thức compile-time quyết định việc biên dịch nhánh nào.
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:8px; border:1px solid #eee;">1️⃣1️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>Short-circuit eval</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>a &amp;&amp; b</code> và <code>a || b</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Rút ngắn đánh giá điều kiện</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> Với <code>&amp;&amp;</code>, nếu trái false → phải không được gọi; với <code>||</code>, nếu trái true → phải không được gọi.<br>
+          <strong>Ví dụ:</strong> <code>if (a &amp;&amp; check()) cout &lt;&lt; "ok";</code><br>
+          <strong>Kết quả:</strong> <code>check()</code> chỉ được gọi nếu <code>a</code> true.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:8px; border:1px solid #eee;">1️⃣2️⃣</td>
+        <td style="padding:8px; border:1px solid #eee;"><b>Pattern / init in if (C++17/23)</b></td>
+        <td style="padding:8px; border:1px solid #eee;"><code>if (init-statement; condition) { ... }</code></td>
+        <td style="padding:8px; border:1px solid #eee;">Khai báo & kiểm tra trong cùng một if (structured binding / pattern)</td>
+        <td style="padding:8px; border:1px solid #eee;">
+          <strong>Chú thích:</strong> C++17 cho phép <code>if (init; cond)</code>; kết hợp structured binding rất tiện. C++23 mở rộng pattern matching hơn.<br>
+          <strong>Ví dụ:</strong> <code>if (auto [x,y] = val; x &gt; 0) cout &lt;&lt; x;</code><br>
+          <strong>Kết quả:</strong> <code>x</code> được in khi điều kiện đúng; <code>x,y</code> chỉ tồn tại trong if.
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+ </details>
+</section>
+</section>
+
+<section>
+     <details>
+   <summary><h2>5️⃣ Vòng lặp</h2></summary>
+  <p>👉 Dùng để lặp lại một khối lệnh nhiều lần.</p>
+
+  <b>for: lặp với số lần biết trước</b>
+  <pre><code>for(int i=0; i&lt;5; i++) {
+  cout &lt;&lt; i &lt;&lt; " ";
+}
+// Kết quả: 0 1 2 3 4</code></pre>
+
+  <b>while: lặp khi điều kiện đúng</b>
+  <pre><code>int x = 0;
+while(x &lt; 3) {
+  cout &lt;&lt; x &lt;&lt; " ";
+  x++;
+}
+// Kết quả: 0 1 2</code></pre>
+
+  <b>do...while: luôn chạy ít nhất 1 lần</b>
+  <pre><code>int n;
+do {
+  cout &lt;&lt; "Nhap so duong: ";
+  cin &gt;&gt; n;
+} while(n &lt;= 0);</code></pre>
+<section>
+     <details>
+<!-- Một dòng HTML: Bảng tổng hợp "TOÀN BỘ LỆNH VỀ VÒNG LẶP TRONG C++" -->
+<div style="overflow-x:auto; margin:12px 0; font-family:Arial, sans-serif;">
+  <table style="width:100%; min-width:1040px; border-collapse:collapse; font-size:14px;">
+    <thead style="background:#0b76c2; color:#fff;">
+      <tr>
+        <th style="padding:10px; border:1px solid #cfdce6; width:8%;">STT</th>
+        <th style="padding:10px; border:1px solid #cfdce6; width:18%;">Loại vòng lặp / Lệnh</th>
+        <th style="padding:10px; border:1px solid #cfdce6; width:18%;">Kiểm tra điều kiện</th>
+        <th style="padding:10px; border:1px solid #cfdce6; width:12%;">Chạy ít nhất 1 lần</th>
+        <th style="padding:10px; border:1px solid #cfdce6; width:24%;">Công dụng / Chú thích chi tiết</th>
+        <th style="padding:10px; border:1px solid #cfdce6; width:20%;">Ví dụ (một lệnh) • Kết quả</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fbfdff;">
+        <td style="padding:10px; border:1px solid #eef3fb;">1</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>for</strong></td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Trước mỗi lần lặp (init; cond; update)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Không</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          Dùng khi biết trước số lần lặp. Thành phần khởi tạo chỉ chạy 1 lần; phần cập nhật chạy sau mỗi vòng. Hỗ trợ nhiều biến, bỏ phần khởi tạo/điều kiện để tạo biến thể (vòng vô hạn, v.v.).
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>for(int i=1;i<=5;i++) cout &lt;&lt; "Lần " &lt;&lt; i &lt;&lt; endl;</code><br>
+          <strong>Kết quả:</strong> Lần 1 … Lần 5
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:10px; border:1px solid #eef3fb;">2</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>while</strong></td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Trước mỗi lần lặp (cond)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Không</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          Kiểm tra điều kiện trước khi chạy khối. Nếu điều kiện sai từ đầu => vòng không chạy lần nào. Thích hợp khi số lần lặp không biết trước.
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>int n=0; while(n&lt;3) cout &lt;&lt; "n=" &lt;&lt; n++ &lt;&lt; endl;</code><br>
+          <strong>Kết quả:</strong> n=0 n=1 n=2
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:10px; border:1px solid #eef3fb;">3</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>do…while</strong></td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Sau khối lặp (check at end)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Có</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          Chạy khối ít nhất 1 lần rồi mới kiểm tra điều kiện. Thích hợp khi cần thao tác trước rồi kiểm tra (ví dụ menu, yêu cầu nhập ít nhất 1 lần).
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>int n=5; do cout &lt;&lt; "n=" &lt;&lt; n &lt;&lt; endl; while(n++ &lt; 5);</code><br>
+          <strong>Kết quả:</strong> n=5 (chỉ chạy 1 lần)
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:10px; border:1px solid #eef3fb;">4</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>for-each (range-based)</strong><br><small>(C++11+)</small></td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Duyệt từng phần tử của container</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Không (tuỳ container)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          Duyệt trực tiếp phần tử của mảng/vector/string… Giảm lỗi, cú pháp ngắn gọn. Có thể dùng tham chiếu để sửa phần tử: <code>for(auto &x: a)</code>.
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>for(int x: std::vector&lt;int&gt;{1,2,3}) cout &lt;&lt; x &lt;&lt; ' ';</code><br>
+          <strong>Kết quả:</strong> 1 2 3
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:10px; border:1px solid #eef3fb;">5</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>Vòng vô hạn</strong></td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Không có điều kiện</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">--</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          Dùng cho chương trình nền, server, vòng menu chờ input. Phải có cơ chế thoát (break/return) nếu cần kết thúc.
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>for(;;) cout &lt;&lt; "loop\\n";</code><br>
+          <strong>Kết quả:</strong> In liên tục (vô hạn) — cần <code>break</code> để dừng
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding:10px; border:1px solid #eef3fb;">6</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>Từ khóa điều khiển</strong><br>(break / continue / return / goto)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">N/A (áp dụng trong vòng lặp)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">N/A</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>break</code>: thoát vòng lặp; <code>continue</code>: bỏ phần còn lại của lần lặp hiện tại; <code>return</code>: thoát hàm; <code>goto</code>: nhảy tới nhãn (không khuyến nghị).
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>for(int i=0;i&lt;10;i++){ if(i==5) break; cout &lt;&lt; i &lt;&lt; ' '; }</code><br>
+          <strong>Kết quả:</strong> 0 1 2 3 4
+        </td>
+      </tr>
+
+      <tr style="background:#fbfdff;">
+        <td style="padding:10px; border:1px solid #eef3fb;">7</td>
+        <td style="padding:10px; border:1px solid #eef3fb;"><strong>Biến thể & ghi chú</strong><br>(for không có init/cond)</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Tuỳ</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">Tuỳ</td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          Ví dụ: <code>for(; i&lt;5; i++)</code> (khởi tạo ngoài); <code>for(;;)</code> (vô hạn). Nên tránh lồng quá sâu; ưu tiên viết rõ ràng, dễ đọc.
+        </td>
+        <td style="padding:10px; border:1px solid #eef3fb;">
+          <code>int i=0; for(;i&lt;3;i++) cout &lt;&lt; i &lt;&lt; ' ';</code><br>
+          <strong>Kết quả:</strong> 0 1 2
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+ </details>
+</section>
+</section>
+</section>
+
+<section>
+<details>
+  <summary><h2>6️⃣ Hàm (Function)</h2>  </summary>
+  <p>👉 Hàm giúp chia chương trình thành các khối nhỏ, dễ quản lý và tái sử dụng.</p>
+
+  <b>Ví dụ hàm tính tổng:</b>
+  <pre><code>int tong(int a, int b) {
+  return a + b;
+}
+
+int main() {
+  cout &lt;&lt; "3 + 4 = " &lt;&lt; tong(3,4);
+  return 0;
+}
+// Kết quả: 3 + 4 = 7</code></pre>
+
+<!DOCTYPE html>
+<section>
+<details>
+  
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+
+  <summary><h1>🧩 TOÀN BỘ LỆNH & CÚ PHÁP VỀ HÀM (FUNCTION) TRONG C++</h1>  </summary>
+
+<hr>
+
+<h2>🧠 I. Khái niệm cơ bản</h2>
+<p>Hàm (function) là một khối lệnh có tên, dùng để thực hiện một nhiệm vụ cụ thể, có thể truyền dữ liệu vào (tham số) và trả kết quả ra (<code>return</code>).</p>
+
+<div class="tip">
+👉 Giúp:<br>
+– Chia nhỏ chương trình → dễ quản lý, dễ đọc<br>
+– Dễ tái sử dụng<br>
+– Giảm lặp lại code
+</div>
+
+<hr>
+
+<h2>🧩 II. Cấu trúc của một hàm trong C++</h2>
+<p><b>🧱 Cú pháp tổng quát:</b></p>
+<pre><code>kiểu_trả_về tên_hàm(danh_sách_tham_số) {
+    // khối lệnh
+    return giá_trị; // nếu có
+}</code></pre>
+
+<p><b>💡 Ví dụ:</b></p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int cong(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int tong = cong(3, 5);
+    cout &lt;&lt; "Tổng = " &lt;&lt; tong;
+    return 0;
+}</code></pre>
+
+<p><b>📝 Giải thích:</b></p>
+<ul>
+  <li><code>int</code> → kiểu dữ liệu trả về</li>
+  <li><code>cong</code> → tên hàm</li>
+  <li><code>(int a, int b)</code> → danh sách tham số</li>
+  <li><code>return a + b;</code> → trả về kết quả</li>
+</ul>
+
+<hr>
+
+<h2>🧮 III. Các loại hàm</h2>
+<table>
+<tr><th>Loại</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>Hàm có giá trị trả về</td><td>Dùng <code>return</code> để trả kết quả</td><td><code>int tinhTong()</code></td></tr>
+<tr><td>Hàm không trả về (void)</td><td>Không dùng <code>return</code></td><td><code>void hienThi()</code></td></tr>
+<tr><td>Hàm có tham số</td><td>Nhận dữ liệu đầu vào</td><td><code>float nhan(float x, float y)</code></td></tr>
+<tr><td>Hàm không có tham số</td><td>Không nhận dữ liệu</td><td><code>void menu()</code></td></tr>
+</table>
+
+<hr>
+
+<h2>📘 IV. Hàm không trả giá trị (void)</h2>
+<pre><code>void xinChao() {
+    cout &lt;&lt; "Xin chào bạn!" &lt;&lt; endl;
+}
+
+int main() {
+    xinChao();
+}</code></pre>
+
+<p><b>📝 Giải thích:</b> Dùng <code>void</code> khi hàm chỉ thực hiện hành động, không cần trả kết quả.</p>
+
+<hr>
+
+<h2>⚙️ V. Hàm có tham số</h2>
+<pre><code>void inBinhPhuong(int n) {
+    cout &lt;&lt; "Bình phương của " &lt;&lt; n &lt;&lt; " là " &lt;&lt; n * n &lt;&lt; endl;
+}
+
+int main() {
+    inBinhPhuong(7);
+}</code></pre>
+
+<hr>
+
+<h2>🧭 VI. Hàm có giá trị trả về</h2>
+<pre><code>double tinhTrungBinh(double a, double b) {
+    return (a + b) / 2;
+}</code></pre>
+
+<p><b>🧠 Giải thích:</b> Dùng <code>return</code> để gửi kết quả về cho nơi gọi hàm.</p>
+
+<hr>
+
+<h2>🧰 VII. Khai báo và định nghĩa hàm</h2>
+<pre><code>int cong(int, int); // prototype
+int cong(int a, int b) { return a + b; }
+cout &lt;&lt; cong(2, 3);</code></pre>
+<p><b>💡 Khi hàm được định nghĩa sau main(), phải khai báo prototype trước.</b></p>
+
+<hr>
+
+<h2>🧩 VIII. Tham trị và tham chiếu</h2>
+
+<p><b>🧠 1. Truyền tham trị (by value):</b></p>
+<pre><code>void tang(int x) { x++; }</code></pre>
+
+<p><b>🧠 2. Truyền tham chiếu (by reference):</b></p>
+<pre><code>void tang(int &amp;x) { x++; }</code></pre>
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+void tang(int &amp;n) { n++; }
+
+int main() {
+    int a = 5;
+    tang(a);
+    cout &lt;&lt; a; // 6
+}</code></pre>
+
+<hr>
+
+<h2>💡 IX. Hàm nặc danh (Lambda Function – C++11+)</h2>
+<pre><code>auto cong = [](int a, int b) { return a + b; };
+cout &lt;&lt; cong(3, 4);</code></pre>
+
+<hr>
+
+<h2>🧮 X. Hàm đệ quy (Recursion)</h2>
+<pre><code>int giaiThua(int n) {
+    if (n == 0) return 1;
+    return n * giaiThua(n - 1);
+}</code></pre>
+
+<p>🧠 Cần có điều kiện dừng để tránh vòng lặp vô hạn.</p>
+
+<hr>
+
+<h2>🧩 XI. Hàm nạp chồng (Function Overloading)</h2>
+<pre><code>int cong(int a, int b) { return a + b; }
+double cong(double a, double b) { return a + b; }</code></pre>
+
+<hr>
+
+<h2>📦 XII. Hàm trong lớp (Class Method)</h2>
+<pre><code>class HinhChuNhat {
+public:
+    int rong, cao;
+    int dienTich() { return rong * cao; }
+};</code></pre>
+
+<hr>
+
+<h2>🧾 XIII. Hàm mặc định (Default Argument)</h2>
+<pre><code>int tinhLuong(int gio, int luong = 50000) {
+    return gio * luong;
+}</code></pre>
+
+<hr>
+
+<h2>🧭 XIV. Từ khóa đặc biệt trong hàm</h2>
+<table>
+<tr><th>Từ khóa</th><th>Ý nghĩa</th></tr>
+<tr><td>return</td><td>Trả về giá trị</td></tr>
+<tr><td>void</td><td>Không có giá trị trả về</td></tr>
+<tr><td>inline</td><td>Chèn trực tiếp hàm – tăng tốc độ</td></tr>
+<tr><td>constexpr</td><td>Tính toán tại thời điểm biên dịch</td></tr>
+<tr><td>static</td><td>Giữ giá trị cũ giữa các lần gọi</td></tr>
+<tr><td>extern</td><td>Dùng hàm ở file khác</td></tr>
+<tr><td>friend</td><td>Cho phép truy cập private class khác</td></tr>
+</table>
+
+<hr>
+
+<h2>📚 XV. Tóm tắt bảng tổng hợp</h2>
+<table>
+<tr><th>Thành phần</th><th>Cú pháp ví dụ</th><th>Chức năng</th></tr>
+<tr><td>Hàm có trả về</td><td><code>int tong(int a, int b)</code></td><td>Tính toán, trả kết quả</td></tr>
+<tr><td>Hàm void</td><td><code>void hienThi()</code></td><td>Thực hiện hành động</td></tr>
+<tr><td>Hàm đệ quy</td><td><code>int giaiThua(int n)</code></td><td>Gọi lại chính nó</td></tr>
+<tr><td>Hàm mặc định</td><td><code>int tinhLuong(int h, int luong = 50k)</code></td><td>Có giá trị mặc định</td></tr>
+<tr><td>Hàm nạp chồng</td><td><code>int cong()</code> / <code>double cong()</code></td><td>Cùng tên, khác tham số</td></tr>
+<tr><td>Lambda</td><td><code>[](int a, int b){ return a+b; }</code></td><td>Hàm ngắn gọn trong dòng</td></tr>
+<tr><td>Hàm trong class</td><td><code>int dienTich()</code></td><td>Là phương thức của lớp</td></tr>
+</table>
+
+<hr>
+
+<p style="text-align:center; font-weight:bold; color:#777;">
+
+</p>
+
+</body>
+</html>
+ </details>
+ </details>
+</section>
+</section>
+</section>
+</section>
+
+<section>
+    <details>
+  <summary><h2>7️⃣ Mảng (Array)</h2>
+  </summary>
+  <p>👉 Mảng lưu trữ nhiều phần tử cùng kiểu dữ liệu trong một biến duy nhất.</p>
+
+  <b>Ví dụ:</b>
+  <pre><code>int a[5] = {1,2,3,4,5};
+
+// In ra tất cả phần tử
+for(int i=0; i&lt;5; i++) {
+  cout &lt;&lt; a[i] &lt;&lt; " ";
+}
+// Kết quả: 1 2 3 4 5</code></pre>
+
+<!DOCTYPE html>
+
+<body>
+
+<section>
+    <details>
+<summary><h1>🧮 TOÀN BỘ LỆNH C++ VỀ MẢNG (ARRAY)</h1></summary>
+
+<hr>
+
+<h2>🧩 I. MẢNG LÀ GÌ?</h2>
+<p>🔹 Mảng (array) là tập hợp các phần tử có cùng kiểu dữ liệu, được lưu liên tiếp trong bộ nhớ.<br>
+🔹 Mỗi phần tử trong mảng được truy cập qua chỉ số (index), bắt đầu từ 0.</p>
+
+<hr>
+
+<h2>📘 II. KHAI BÁO MẢNG</h2>
+<p>🔹 <b>Cú pháp chung:</b></p>
+<pre><code>kiểu_dữ_liệu tên_mảng[kích_thước];</code></pre>
+
+<p>💡 <b>Ví dụ:</b></p>
+<pre><code>int a[5];         // Mảng 5 phần tử kiểu int
+float diem[10];   // Mảng 10 phần tử kiểu float
+char chu[20];     // Mảng ký tự (chuỗi)
+
+int x[5] = {1, 2, 3, 4, 5};
+int y[] = {10, 20, 30};
+char z[] = {'H', 'i', '\0'}; // tương đương "Hi"</code></pre>
+
+<hr>
+
+<h2>📦 III. TRUY CẬP PHẦN TỬ TRONG MẢNG</h2>
+<p>🧠 Cú pháp: <code>tên_mảng[chỉ_số]</code></p>
+
+<pre><code>int a[3] = {5, 10, 15};
+cout &lt;&lt; a[0]; // in ra 5
+cout &lt;&lt; a[2]; // in ra 15
+a[1] = 20;    // gán giá trị mới cho phần tử thứ 2
+</code></pre>
+
+<hr>
+
+<h2>🔁 IV. DUYỆT MẢNG (VỚI VÒNG LẶP)</h2>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[5] = {1, 2, 3, 4, 5};
+
+    for (int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; "a[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; a[i] &lt;&lt; endl;
+    }
+}</code></pre>
+
+<p>📝 Kết quả:</p>
+<pre><code>a[0] = 1
+a[1] = 2
+a[2] = 3
+a[3] = 4
+a[4] = 5</code></pre>
+
+<hr>
+
+<h2>🔄 V. NHẬP – XUẤT DỮ LIỆU MẢNG</h2>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n, a[100];
+    cout &lt;&lt; "Nhập số phần tử: ";
+    cin &gt;&gt; n;
+
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; "a[" &lt;&lt; i &lt;&lt; "] = ";
+        cin &gt;&gt; a[i];
+    }
+
+    cout &lt;&lt; "Các phần tử: ";
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+    }
+}</code></pre>
+
+<hr>
+
+<h2>🧮 VI. MẢNG 2 CHIỀU</h2>
+<p>🧠 Cú pháp: <code>kiểu_dữ_liệu tên_mảng[hàng][cột];</code></p>
+
+<pre><code>int a[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+for (int i = 0; i &lt; 2; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        cout &lt;&lt; a[i][j] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}</code></pre>
+
+<p>📝 Kết quả:</p>
+<pre><code>1 2 3
+4 5 6</code></pre>
+
+<hr>
+
+<h2>⚙️ VII. MẢNG ĐA CHIỀU (3 chiều trở lên)</h2>
+<pre><code>int arr[x][y][z];
+
+int cube[2][2][2] = {
+    {{1, 2}, {3, 4}},
+    {{5, 6}, {7, 8}}
+};</code></pre>
+
+<hr>
+
+<h2>🧰 VIII. LỆNH &amp; HÀM HỮU ÍCH VỚI MẢNG</h2>
+<table>
+<tr><th>Lệnh / Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td><code>sizeof(array)</code></td><td>Trả về kích thước (tính theo byte)</td><td><code>sizeof(a)</code></td></tr>
+<tr><td><code>sizeof(a)/sizeof(a[0])</code></td><td>Số phần tử trong mảng</td><td><code>int n = sizeof(a)/sizeof(a[0]);</code></td></tr>
+<tr><td><code>memset(a, 0, sizeof(a));</code></td><td>Gán toàn bộ mảng = 0 (cần &lt;cstring&gt;)</td><td>–</td></tr>
+<tr><td><code>sort(a, a+n);</code></td><td>Sắp xếp mảng (cần &lt;algorithm&gt;)</td><td>–</td></tr>
+<tr><td><code>reverse(a, a+n);</code></td><td>Đảo ngược mảng (cần &lt;algorithm&gt;)</td><td>–</td></tr>
+<tr><td><code>min_element(a, a+n)</code></td><td>Trả về phần tử nhỏ nhất</td><td>–</td></tr>
+<tr><td><code>max_element(a, a+n)</code></td><td>Trả về phần tử lớn nhất</td><td>–</td></tr>
+</table>
+
+<hr>
+
+<h2>💬 IX. MẢNG KÝ TỰ (CHAR ARRAY)</h2>
+<pre><code>char name[20] = "Van Do";
+cout &lt;&lt; name;  // In ra: Van Do
+</code></pre>
+<p>📌 Chuỗi ký tự phải kết thúc bằng ký tự <code>'\0'</code> (null terminator).</p>
+
+<hr>
+
+<h2>🧮 X. MẢNG ĐỘNG (Dynamic Array – dùng new)</h2>
+<pre><code>int n;
+cout &lt;&lt; "Nhập n: ";
+cin &gt;&gt; n;
+
+int* a = new int[n];
+
+for (int i = 0; i &lt; n; i++)
+    a[i] = i * 2;
+
+for (int i = 0; i &lt; n; i++)
+    cout &lt;&lt; a[i] &lt;&lt; " ";
+
+delete[] a;
+</code></pre>
+
+<hr>
+
+<h2>🚀 XI. RANGE-BASED FOR LOOP (C++11+)</h2>
+<pre><code>int a[] = {2, 4, 6, 8};
+for (int x : a) {
+    cout &lt;&lt; x &lt;&lt; " ";
+}
+</code></pre>
+<p>📤 Kết quả:</p>
+<pre><code>2 4 6 8</code></pre>
+
+<hr>
+
+<h2>🧾 XII. MẢNG TRONG HÀM</h2>
+<pre><code>void inMang(int a[], int n) {
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+}
+
+int main() {
+    int b[] = {1, 2, 3, 4};
+    inMang(b, 4);
+}</code></pre>
+
+<hr>
+
+<h2>⚠️ XIII. LỖI THƯỜNG GẶP</h2>
+<table>
+<tr><th>Lỗi</th><th>Nguyên nhân</th><th>Cách khắc phục</th></tr>
+<tr><td>Array index out of bounds</td><td>Truy cập chỉ số ngoài phạm vi</td><td>Đảm bảo 0 ≤ i &lt; n</td></tr>
+<tr><td>Không khởi tạo mảng</td><td>Dùng giá trị rác</td><td>Gán giá trị mặc định hoặc dùng memset</td></tr>
+<tr><td>Quên delete[]</td><td>Rò rỉ bộ nhớ khi dùng new</td><td>Luôn giải phóng khi xong</td></tr>
+</table>
+
+<hr>
+
+
+</body>
+</html>
+ </details>
+ </details>
+</section>
+</section>
+<section>
+<details>
+  <summary>
+  <h2>8️⃣ Chuỗi (String)</h2></summary>
+  <p>👉 Chuỗi là dãy ký tự, trong C++ có thể dùng <code>string</code> (cần &lt;string&gt;).</p>
+
+  <b>Ví dụ:</b>
+  <pre><code>#include &lt;string&gt;
+string name = "Van";
+cout &lt;&lt; "Tên: " &lt;&lt; name &lt;&lt; endl;
+cout &lt;&lt; "Độ dài: " &lt;&lt; name.length() &lt;&lt; endl;
+
+// Kết quả:
+// Tên: Van
+// Độ dài: 3</code></pre>
+<section>
+<details>
+  <summary>
+<h2>🧠 TOÀN BỘ LỆNH &amp; CÚ PHÁP TRONG THƯ VIỆN &lt;string&gt;</h2></summary>
+<section>
+<p><b>Thư viện:</b></p>
+<pre><code>#include &lt;string&gt;
+using namespace std;
+</code></pre>
+<p><b>Khai báo chuỗi:</b></p>
+<pre><code>string s;               // Chuỗi rỗng
+string s2 = "Hello";    // Chuỗi khởi tạo
+</code></pre>
+</section>
+
+<section>
+<h2>🧱 I. Các cách khởi tạo chuỗi</h2>
+<table>
+<tr><th>Cú pháp</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>string s;</td><td>Chuỗi rỗng</td><td>string a;</td></tr>
+<tr><td>string s("Hello");</td><td>Chuỗi từ hằng ký tự</td><td>string b("Xin chào");</td></tr>
+<tr><td>string s(5, 'A');</td><td>Gồm 5 ký tự ‘A’</td><td>"AAAAA"</td></tr>
+<tr><td>string s2(s1);</td><td>Sao chép chuỗi khác</td><td>string s2(s1);</td></tr>
+<tr><td>string s(s1, pos, n);</td><td>Lấy từ chuỗi khác, bắt đầu pos, dài n</td><td>string t(s1, 2, 3);</td></tr>
+<tr><td>string s = {'H','i'};</td><td>Danh sách ký tự</td><td>"Hi"</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🔠 II. Các toán tử của chuỗi</h2>
+<table>
+<tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+<tr><td>=</td><td>Gán chuỗi</td><td>s = "ABC";</td></tr>
+<tr><td>+</td><td>Nối chuỗi</td><td>s = a + b;</td></tr>
+<tr><td>+=</td><td>Nối và gán</td><td>s += "DEF";</td></tr>
+<tr><td>==, !=</td><td>So sánh bằng/khác</td><td>if (a == b)</td></tr>
+<tr><td>&lt;, &gt;, &lt;=, &gt;=</td><td>So sánh theo từ điển</td><td>if (a &lt; b)</td></tr>
+<tr><td>[i]</td><td>Truy cập ký tự thứ i</td><td>s[0] = 'X';</td></tr>
+<tr><td>&lt;&lt;, &gt;&gt;</td><td>Xuất / nhập</td><td>cin &gt;&gt; s; cout &lt;&lt; s;</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🎯 III. Các hàm thành viên của lớp string</h2>
+
+<h3>1️⃣ Nhóm thông tin</h3>
+<table>
+<tr><th>Hàm</th><th>Chức năng</th><th>Ví dụ</th></tr>
+<tr><td>s.length()</td><td>Độ dài chuỗi</td><td>cout &lt;&lt; s.length();</td></tr>
+<tr><td>s.size()</td><td>Giống length()</td><td></td></tr>
+<tr><td>s.max_size()</td><td>Số ký tự tối đa có thể chứa</td><td></td></tr>
+<tr><td>s.capacity()</td><td>Dung lượng hiện có</td><td></td></tr>
+<tr><td>s.empty()</td><td>Kiểm tra chuỗi rỗng</td><td>if (s.empty())</td></tr>
+</table>
+
+<h3>2️⃣ Nhóm truy cập / thay đổi nội dung</h3>
+<table>
+<tr><th>Hàm</th><th>Chức năng</th><th>Ví dụ</th></tr>
+<tr><td>s.at(i)</td><td>Truy cập ký tự có kiểm tra biên</td><td>cout &lt;&lt; s.at(2);</td></tr>
+<tr><td>s[i]</td><td>Truy cập nhanh (không kiểm tra biên)</td><td></td></tr>
+<tr><td>s.front()</td><td>Ký tự đầu tiên</td><td></td></tr>
+<tr><td>s.back()</td><td>Ký tự cuối cùng</td><td></td></tr>
+<tr><td>s.clear()</td><td>Xóa toàn bộ chuỗi</td><td></td></tr>
+<tr><td>s.push_back('A')</td><td>Thêm ký tự cuối</td><td></td></tr>
+<tr><td>s.pop_back()</td><td>Xóa ký tự cuối</td><td></td></tr>
+</table>
+</section>
+
+<section>
+<h3>3️⃣ Nhóm thêm / nối chuỗi</h3>
+<table>
+<tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>s.append(str)</td><td>Thêm chuỗi str</td><td>s.append("abc");</td></tr>
+<tr><td>s += "abc"</td><td>Tương tự append</td><td></td></tr>
+<tr><td>s.insert(pos, str)</td><td>Chèn chuỗi tại vị trí pos</td><td>s.insert(2, "XYZ");</td></tr>
+<tr><td>s.replace(pos, n, str)</td><td>Thay n ký tự tại pos bằng str</td><td></td></tr>
+<tr><td>s.assign(str)</td><td>Gán giá trị chuỗi mới</td><td></td></tr>
+<tr><td>s.swap(str2)</td><td>Hoán đổi nội dung</td><td></td></tr>
+</table>
+</section>
+
+<section>
+<h3>4️⃣ Nhóm tìm kiếm</h3>
+<table>
+<tr><th>Hàm</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+<tr><td>s.find(str)</td><td>Tìm vị trí đầu tiên của str</td><td>s.find("ab")</td></tr>
+<tr><td>s.rfind(str)</td><td>Tìm vị trí cuối cùng của str</td><td></td></tr>
+<tr><td>s.find_first_of(chars)</td><td>Tìm ký tự đầu tiên thuộc tập chars</td><td></td></tr>
+<tr><td>s.find_last_of(chars)</td><td>Tìm ký tự cuối cùng thuộc tập chars</td><td></td></tr>
+<tr><td>s.find_first_not_of(chars)</td><td>Tìm ký tự đầu tiên không thuộc tập chars</td><td></td></tr>
+<tr><td>s.find_last_not_of(chars)</td><td>Ngược lại của trên</td><td></td></tr>
+</table>
+<p><b>🟢 Trả về:</b><br>
+Vị trí (chỉ số) nếu tìm thấy<br>
+<code>string::npos</code> nếu không thấy
+</p>
+</section>
+
+<section>
+<h3>✂️ 5️⃣ Nhóm cắt chuỗi</h3>
+<table>
+<tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>s.substr(pos, n)</td><td>Lấy chuỗi con</td><td>s.substr(2,3)</td></tr>
+<tr><td>s.erase(pos, n)</td><td>Xóa n ký tự từ pos</td><td>s.erase(1,2)</td></tr>
+<tr><td>s.resize(n)</td><td>Thay đổi độ dài chuỗi</td><td></td></tr>
+<tr><td>s.shrink_to_fit()</td><td>Giảm bộ nhớ dư thừa</td><td></td></tr>
+</table>
+</section>
+
+<section>
+<h3>🧮 6️⃣ Nhóm so sánh &amp; chuyển đổi</h3>
+<table>
+<tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+<tr><td>s.compare(str2)</td><td>So sánh (0 nếu bằng nhau)</td><td></td></tr>
+<tr><td>s.c_str()</td><td>Trả C-string (dùng cho hàm C)</td><td>printf("%s", s.c_str());</td></tr>
+<tr><td>s.data()</td><td>Giống c_str() nhưng có thể chứa '\0'</td><td></td></tr>
+<tr><td>stoi(s), stof(s), stod(s)</td><td>Chuyển string thành số</td><td></td></tr>
+<tr><td>to_string(x)</td><td>Chuyển số thành chuỗi</td><td>string s = to_string(123);</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🧰 VII. Một số ví dụ tổng hợp</h2>
+<pre><code>// Ví dụ 1
+string a = "Hello", b = "World";
+string c = a + " " + b;
+cout &lt;&lt; c &lt;&lt; " (" &lt;&lt; c.length() &lt;&lt; " ký tự)";
+
+// Ví dụ 2
+string s = "xin chao ban";
+int pos = s.find("ban");
+if (pos != string::npos)
+    s.replace(pos, 3, "bạn");
+cout &lt;&lt; s;
+
+// Ví dụ 3
+string s = "abcdef";
+cout &lt;&lt; s.substr(2, 3);
+s.erase(1, 2);
+cout &lt;&lt; s;
+
+// Ví dụ 4
+string s = "  Hello  ";
+s.erase(0, s.find_first_not_of(' '));
+s.erase(s.find_last_not_of(' ') + 1);
+cout &lt;&lt; "[" &lt;&lt; s &lt;&lt; "]";
+</code></pre>
+</section>
+
+<section>
+<h2>🧮 VIII. Các hằng số quan trọng</h2>
+<table>
+<tr><th>Hằng số</th><th>Ý nghĩa</th></tr>
+<tr><td>string::npos</td><td>Giá trị đặc biệt khi không tìm thấy (thường là -1)</td></tr>
+</table>
+
+ </details>
+</section>
+</section>
+
+<body>
+<section>
+<details>
+  <summary>
+<h2>🧩 vector</h2></summary>
+
+<section>
+<h2>🧩 I. Khai báo &amp; Khởi tạo</h2>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+</code></pre>
+
+<h3>1️⃣ Khai báo vector</h3>
+<pre><code>vector&lt;int&gt; v;               // vector rỗng
+vector&lt;int&gt; v2(5);           // 5 phần tử, mặc định = 0
+vector&lt;int&gt; v3(5, 9);        // 5 phần tử, mỗi phần tử = 9
+vector&lt;int&gt; v4 = {1, 2, 3};  // khởi tạo danh sách
+</code></pre>
+
+<p>📘 <b>Giải thích:</b><br>
+<code>vector&lt;T&gt;</code> là mảng động kiểu <code>T</code>.<br>
+Có thể mở rộng hoặc thu nhỏ trong khi chạy chương trình.
+</p>
+</section>
+
+<section>
+<h2>🧱 II. Các hàm cơ bản</h2>
+
+<h3>2️⃣ push_back(x) – Thêm phần tử vào cuối</h3>
+<pre><code>vector&lt;int&gt; v;
+v.push_back(10);
+v.push_back(20);
+cout &lt;&lt; v[1]; // 20
+</code></pre>
+
+<h3>3️⃣ pop_back() – Xóa phần tử cuối</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+v.pop_back(); // Xóa 3
+</code></pre>
+
+<h3>4️⃣ insert(pos, value) – Chèn phần tử</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+v.insert(v.begin() + 1, 9);  // [1, 9, 2, 3]
+</code></pre>
+
+<h3>5️⃣ erase(pos) – Xóa phần tử tại vị trí</h3>
+<pre><code>vector&lt;int&gt; v = {10, 20, 30};
+v.erase(v.begin() + 1);  // [10, 30]
+</code></pre>
+
+<h3>6️⃣ clear() – Xóa toàn bộ vector</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+v.clear(); // vector rỗng
+</code></pre>
+
+<h3>7️⃣ assign(n, value) – Gán lại toàn bộ</h3>
+<pre><code>vector&lt;int&gt; v;
+v.assign(4, 7);  // [7, 7, 7, 7]
+</code></pre>
+
+<h3>8️⃣ resize(n) – Thay đổi kích thước</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2};
+v.resize(5);  // [1, 2, 0, 0, 0]
+</code></pre>
+
+<h3>9️⃣ reserve(n) – Dự trữ bộ nhớ</h3>
+<pre><code>vector&lt;int&gt; v;
+v.reserve(100);  // Chuẩn bị vùng nhớ cho 100 phần tử
+</code></pre>
+</section>
+
+<section>
+<h2>🧮 III. Truy cập phần tử</h2>
+
+<h3>🔟 at(index) – Truy cập an toàn</h3>
+<pre><code>vector&lt;int&gt; v = {5, 10, 15};
+cout &lt;&lt; v.at(2);  // 15
+</code></pre>
+
+<h3>11️⃣ operator[]</h3>
+<pre><code>vector&lt;int&gt; v = {3, 6, 9};
+cout &lt;&lt; v[0]; // 3
+</code></pre>
+
+<h3>12️⃣ front() – Phần tử đầu tiên</h3>
+<pre><code>vector&lt;int&gt; v = {7, 8, 9};
+cout &lt;&lt; v.front(); // 7
+</code></pre>
+
+<h3>13️⃣ back() – Phần tử cuối</h3>
+<pre><code>vector&lt;int&gt; v = {7, 8, 9};
+cout &lt;&lt; v.back(); // 9
+</code></pre>
+</section>
+
+<section>
+<h2>📏 IV. Thông tin về vector</h2>
+
+<h3>14️⃣ size() – Số phần tử</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3, 4};
+cout &lt;&lt; v.size(); // 4
+</code></pre>
+
+<h3>15️⃣ capacity() – Sức chứa hiện tại</h3>
+<pre><code>vector&lt;int&gt; v;
+v.reserve(10);
+cout &lt;&lt; v.capacity(); // 10
+</code></pre>
+
+<h3>16️⃣ empty() – Kiểm tra rỗng</h3>
+<pre><code>vector&lt;int&gt; v;
+cout &lt;&lt; v.empty(); // 1 (true)
+</code></pre>
+</section>
+
+<section>
+<h2>🔄 V. Duyệt qua vector</h2>
+
+<h3>17️⃣ Duyệt bằng chỉ số</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+for (int i = 0; i &lt; v.size(); i++)
+    cout &lt;&lt; v[i] &lt;&lt; " ";
+</code></pre>
+
+<h3>18️⃣ Duyệt bằng for-each</h3>
+<pre><code>vector&lt;int&gt; v = {10, 20, 30};
+for (int x : v)
+    cout &lt;&lt; x &lt;&lt; " ";
+</code></pre>
+
+<h3>19️⃣ Duyệt bằng iterator</h3>
+<pre><code>vector&lt;int&gt; v = {5, 6, 7};
+for (auto it = v.begin(); it != v.end(); ++it)
+    cout &lt;&lt; *it &lt;&lt; " ";
+</code></pre>
+</section>
+
+<section>
+<h2>🧭 VI. Iterator (vị trí phần tử)</h2>
+
+<h3>20️⃣ begin() – Iterator đầu</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+auto it = v.begin();
+cout &lt;&lt; *it; // 1
+</code></pre>
+
+<h3>21️⃣ end() – Iterator cuối</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+auto it = v.end() - 1;
+cout &lt;&lt; *it; // 3
+</code></pre>
+
+<h3>22️⃣ rbegin() / rend() – Duyệt ngược</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 3};
+for (auto it = v.rbegin(); it != v.rend(); ++it)
+    cout &lt;&lt; *it &lt;&lt; " "; // 3 2 1
+</code></pre>
+</section>
+
+<section>
+<h2>🧹 VII. So sánh, gán &amp; hoán đổi</h2>
+
+<h3>23️⃣ Toán tử =</h3>
+<pre><code>vector&lt;int&gt; a = {1, 2, 3};
+vector&lt;int&gt; b;
+b = a;  // Sao chép toàn bộ
+</code></pre>
+
+<h3>24️⃣ swap()</h3>
+<pre><code>vector&lt;int&gt; a = {1, 2};
+vector&lt;int&gt; b = {9, 8};
+a.swap(b);  // a: [9,8], b: [1,2]
+</code></pre>
+
+<h3>25️⃣ So sánh ==, !=, &lt;, &gt;</h3>
+<pre><code>vector&lt;int&gt; a = {1, 2, 3};
+vector&lt;int&gt; b = {1, 2, 3};
+if (a == b) cout &lt;&lt; "Giống nhau";
+</code></pre>
+</section>
+
+<section>
+<h2>🧮 VIII. Một số thao tác mở rộng</h2>
+
+<h3>26️⃣ emplace_back()</h3>
+<pre><code>vector&lt;pair&lt;int,int&gt;&gt; v;
+v.emplace_back(1, 2);
+</code></pre>
+
+<h3>27️⃣ emplace(pos, value)</h3>
+<pre><code>vector&lt;int&gt; v = {1, 2, 4};
+v.emplace(v.begin() + 2, 3);  // [1,2,3,4]
+</code></pre>
+
+<h3>28️⃣ shrink_to_fit()</h3>
+<pre><code>vector&lt;int&gt; v(100);
+v.resize(10);
+v.shrink_to_fit();
+</code></pre>
+</section>
+
+<section>
+<h2>🧮 IX. Vector 2 chiều</h2>
+<pre><code>vector&lt;vector&lt;int&gt;&gt; a(2, vector&lt;int&gt;(3, 0));
+a[0][1] = 5;
+a[1][2] = 9;
+</code></pre>
+</section>
+
+<section>
+<h2>⚙️ X. Ví dụ tổng hợp</h2>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {5, 2, 8, 1};
+    
+    v.push_back(10);
+    sort(v.begin(), v.end());
+    
+    cout &lt;&lt; "Sau khi sap xep: ";
+    for (int x : v) cout &lt;&lt; x &lt;&lt; " ";
+    
+    v.erase(v.begin());
+    cout &lt;&lt; "\nSau khi xoa dau: ";
+    for (int x : v) cout &lt;&lt; x &lt;&lt; " ";
+    
+    cout &lt;&lt; "\nSize: " &lt;&lt; v.size();
+    cout &lt;&lt; "\nFront: " &lt;&lt; v.front();
+    cout &lt;&lt; "\nBack: " &lt;&lt; v.back();
+}
+</code></pre>
+</section>
+
+<section>
+<h2>📘 Tổng hợp nhanh</h2>
+<table>
+<tr><th>Nhóm</th><th>Lệnh</th><th>Chức năng</th></tr>
+<tr><td>Thêm</td><td>push_back(), emplace_back()</td><td>Thêm phần tử</td></tr>
+<tr><td>Xóa</td><td>pop_back(), erase(), clear()</td><td>Xóa phần tử</td></tr>
+<tr><td>Chèn</td><td>insert(), emplace()</td><td>Chèn phần tử</td></tr>
+<tr><td>Truy cập</td><td>at(), [], front(), back()</td><td>Lấy phần tử</td></tr>
+<tr><td>Kích thước</td><td>size(), capacity(), empty()</td><td>Thông tin vector</td></tr>
+<tr><td>Duyệt</td><td>begin(), end(), rbegin(), rend()</td><td>Truy cập theo vị trí</td></tr>
+<tr><td>Gán &amp; So sánh</td><td>assign(), swap(), =</td><td>Thay thế nội dung</td></tr>
+<tr><td>Bộ nhớ</td><td>reserve(), resize(), shrink_to_fit()</td><td>Quản lý vùng nhớ</td></tr>
+</table>
+</section>
+ </details>
+</section>
+</section>
+
+<section>
+<details>
+  <summary><h2>9️⃣ Tạm dừng chương trình (Sleep / Delay)</h2></summary>
+
+  <p>Trong C++, nếu bạn muốn chương trình <strong>dừng lại một khoảng thời gian</strong> rồi mới in tiếp — ta dùng hàm <code>Sleep</code> hoặc <code>sleep</code> tùy hệ điều hành.</p>
+
+  <h3>🪟 Trên Windows (Dev C++, Code::Blocks…)</h3>
+  <p>Dùng hàm <code>Sleep(milliseconds)</code> trong thư viện <code>&lt;windows.h&gt;</code>. Đơn vị là mili giây (1000 ms = 1 giây).</p>
+  <pre><code>#include &lt;iostream&gt;
+#include &lt;windows.h&gt; // để dùng Sleep
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Chuan bi...\n";
+    Sleep(1000);  // đợi 1 giây
+
+    cout &lt;&lt; 3 &lt;&lt; endl;
+    Sleep(1000);
+
+    cout &lt;&lt; 2 &lt;&lt; endl;
+    Sleep(1000);
+
+    cout &lt;&lt; 1 &lt;&lt; endl;
+    Sleep(1000);
+
+    cout &lt;&lt; "Bat dau!" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+
+  <h3>🐧 Trên Linux / Mac</h3>
+  <p>Dùng hàm <code>sleep(seconds)</code> trong thư viện <code>&lt;unistd.h&gt;</code>. Đơn vị là giây.</p>
+  <pre><code>#include &lt;iostream&gt;
+#include &lt;unistd.h&gt; // để dùng sleep
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Chuan bi...\n";
+    sleep(1);  // đợi 1 giây
+
+    cout &lt;&lt; 3 &lt;&lt; endl;
+    sleep(1);
+
+    cout &lt;&lt; 2 &lt;&lt; endl;
+    sleep(1);
+
+    cout &lt;&lt; 1 &lt;&lt; endl;
+    sleep(1);
+
+    cout &lt;&lt; "Bat dau!" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+
+  <h3>🌍 Đa nền tảng (Windows, Linux, Mac)</h3>
+  <p>Đây là cách hiện đại nhất, dùng thư viện chuẩn <code>&lt;chrono&gt;</code> và <code>&lt;thread&gt;</code> — chạy được trên mọi hệ điều hành hỗ trợ C++11 trở lên.</p>
+  <pre><code>#include &lt;iostream&gt;
+#include &lt;chrono&gt;   // để dùng chrono::milliseconds
+#include &lt;thread&gt;   // để dùng this_thread::sleep_for
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Chuan bi...\n";
+    this_thread::sleep_for(chrono::milliseconds(500)); // đợi 0.5 giây
+
+    cout &lt;&lt; 3 &lt;&lt; endl;
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    cout &lt;&lt; 2 &lt;&lt; endl;
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    cout &lt;&lt; 1 &lt;&lt; endl;
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    cout &lt;&lt; "Bat dau!" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+
+  <h3>📘 Ghi chú:</h3>
+
+  <div style="overflow-x: auto; margin: 10px 0;">
+    <table style="border-collapse: collapse; width: 100%; min-width: 500px;">
+      <thead>
+        <tr style="background-color: #f2f2f2;">
+          <th style="border: 1px solid #ccc; padding: 8px; text-align: left;">Nền tảng</th>
+          <th style="border: 1px solid #ccc; padding: 8px; text-align: left;">Dừng theo giây</th>
+          <th style="border: 1px solid #ccc; padding: 8px; text-align: left;">Dừng theo mili giây</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 8px;">🪟 Windows</td>
+          <td style="border: 1px solid #ccc; padding: 8px;"><code>Sleep(3000);</code> → 3 giây</td>
+          <td style="border: 1px solid #ccc; padding: 8px;"><code>Sleep(500);</code> → 0.5 giây</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+          <td style="border: 1px solid #ccc; padding: 8px;">🐧 Linux / Mac</td>
+          <td style="border: 1px solid #ccc; padding: 8px;"><code>sleep(3);</code> → 3 giây</td>
+          <td style="border: 1px solid #ccc; padding: 8px;"><code>usleep(500000);</code> → 0.5 giây</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 8px;">🌍 Đa nền tảng (C++11+)</td>
+          <td style="border: 1px solid #ccc; padding: 8px;"><code>this_thread::sleep_for(chrono::seconds(3));</code></td>
+          <td style="border: 1px solid #ccc; padding: 8px;"><code>this_thread::sleep_for(chrono::milliseconds(500));</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><b>Khuyến nghị:</b> Dùng cách đa nền tảng (C++11 trở lên) để code hiện đại và tương thích cao.</p>
+</details>
+</section>
+
+<!-- 🔹 PHẦN 10: TẤT CẢ THƯ VIỆN TRONG C++ -->
+<section>
+<details>
+  <summary><h2>🔟. Tất cả Thư viện Trong C++</h2></summary>
+  <section>
+<details>
+  <summary>
+  <h3>🟢Bảng tổng hợp toàn bộ thư viện chuẩn (Standard Library).</h3></summary>
+
+ 
+
+  <!-- I/O -->
+  <h3>🧩 I. Nhóm Thư viện Nhập/Xuất (I/O)</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;iostream&gt;</code></td><td>Nhập xuất cơ bản (cin, cout, cerr, clog). Cung cấp <code>istream</code>, <code>ostream</code>, xử lý luồng dữ liệu chuẩn.</td></tr>
+      <tr><td><code>&lt;iomanip&gt;</code></td><td>Định dạng đầu ra: <code>setw()</code>, <code>setprecision()</code>, <code>fixed</code>, <code>left/right</code>.</td></tr>
+      <tr><td><code>&lt;fstream&gt;</code></td><td>Đọc và ghi tệp: <code>ifstream</code>, <code>ofstream</code>, <code>fstream</code> (mở file, đọc dòng, ghi file văn bản/nhị phân).</td></tr>
+      <tr><td><code>&lt;sstream&gt;</code></td><td>Xử lý luồng chuỗi: <code>istringstream</code>, <code>ostringstream</code>, <code>stringstream</code> – chuyển đổi dữ liệu chuỗi &lt;→&gt; kiểu.</td></tr>
+      <tr><td><code>&lt;cstdio&gt;</code></td><td>Thư viện C-style I/O: <code>printf()</code>, <code>scanf()</code>, <code>fopen()</code>, <code>fclose()</code>, ...</td></tr>
+      <tr><td><code>&lt;streambuf&gt;</code></td><td>Quản lý bộ đệm luồng. Dùng cho thao tác nâng cao với <code>rdbuf()</code>.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- STRING -->
+  <h3>💾 II. Nhóm Thư viện về Chuỗi & Ký tự</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;string&gt;</code></td><td>Cung cấp lớp <code>std::string</code>: nối chuỗi, so sánh, tìm, cắt, thay thế, truy cập ký tự, độ dài, ...</td></tr>
+      <tr><td><code>&lt;cstring&gt;</code></td><td>Hàm C xử lý chuỗi: <code>strcpy()</code>, <code>strcmp()</code>, <code>strlen()</code>, <code>strcat()</code>, ...</td></tr>
+      <tr><td><code>&lt;cctype&gt;</code></td><td>Kiểm tra ký tự: <code>isalpha()</code>, <code>isdigit()</code>, <code>toupper()</code>, <code>tolower()</code>.</td></tr>
+      <tr><td><code>&lt;cwchar&gt;</code></td><td>Chuỗi ký tự rộng (<code>wchar_t</code>): <code>wcscpy()</code>, <code>wcslen()</code>.</td></tr>
+      <tr><td><code>&lt;cwctype&gt;</code></td><td>Kiểm tra ký tự rộng: <code>iswalpha()</code>, <code>towupper()</code>, ...</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- MATH -->
+  <h3>⚙️ III. Nhóm Thư viện Toán học</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;cmath&gt;</code></td><td>Hàm toán học cơ bản: <code>sin()</code>, <code>cos()</code>, <code>pow()</code>, <code>sqrt()</code>, <code>round()</code>, <code>fabs()</code>.</td></tr>
+      <tr><td><code>&lt;cstdlib&gt;</code></td><td>Hàm tiện ích: <code>rand()</code>, <code>abs()</code>, <code>malloc()</code>, <code>atoi()</code>, <code>exit()</code>.</td></tr>
+      <tr><td><code>&lt;ctime&gt;</code></td><td>Làm việc với thời gian hệ thống: <code>time()</code>, <code>clock()</code>, <code>difftime()</code>, <code>localtime()</code>.</td></tr>
+      <tr><td><code>&lt;chrono&gt;</code></td><td>Đo thời gian chính xác cao (C++11): <code>steady_clock</code>, <code>system_clock</code>, <code>duration</code>.</td></tr>
+      <tr><td><code>&lt;random&gt;</code></td><td>Sinh số ngẫu nhiên hiện đại: <code>mt19937</code>, <code>uniform_int_distribution</code>.</td></tr>
+      <tr><td><code>&lt;numeric&gt;</code></td><td>Tính tổng, tích lũy, tích vô hướng: <code>accumulate()</code>, <code>inner_product()</code>.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- CONTAINERS -->
+  <h3>🧮 IV. Nhóm Thư viện Cấu trúc Dữ liệu (Containers)</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;vector&gt;</code></td><td>Mảng động: thêm/xóa phần tử, truy cập nhanh.</td></tr>
+      <tr><td><code>&lt;array&gt;</code></td><td>Mảng cố định kích thước (C++11), hỗ trợ iterator.</td></tr>
+      <tr><td><code>&lt;list&gt;</code></td><td>Danh sách liên kết đôi (<code>push_back()</code>, <code>insert()</code>).</td></tr>
+      <tr><td><code>&lt;deque&gt;</code></td><td>Hàng đợi hai đầu (<code>push_front()</code>, <code>pop_back()</code>).</td></tr>
+      <tr><td><code>&lt;stack&gt;</code></td><td>Ngăn xếp LIFO (<code>push()</code>, <code>pop()</code>).</td></tr>
+      <tr><td><code>&lt;queue&gt;</code></td><td>Hàng đợi FIFO (<code>front()</code>, <code>back()</code>).</td></tr>
+      <tr><td><code>&lt;set&gt;</code></td><td>Tập hợp không trùng, tự sắp xếp.</td></tr>
+      <tr><td><code>&lt;map&gt;</code></td><td>Bản đồ key → value, sắp xếp theo khóa.</td></tr>
+      <tr><td><code>&lt;unordered_set&gt;</code></td><td>Tập hợp dùng hash table (không sắp xếp).</td></tr>
+      <tr><td><code>&lt;unordered_map&gt;</code></td><td>Bản đồ không sắp xếp (O(1) trung bình).</td></tr>
+      <tr><td><code>&lt;bitset&gt;</code></td><td>Lưu trữ chuỗi bit, thao tác bit logic.</td></tr>
+      <tr><td><code>&lt;span&gt;</code></td><td>Truy cập vùng dữ liệu mà không sao chép (C++20).</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ALGORITHMS -->
+  <h3>🔄 V. Nhóm Thư viện Thuật toán (Algorithms & Iterators)</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;algorithm&gt;</code></td><td>Hàm sắp xếp, tìm kiếm, đếm, sao chép, đảo ngược, xoay, hợp, giao, ...</td></tr>
+      <tr><td><code>&lt;iterator&gt;</code></td><td>Tạo và thao tác iterator: <code>advance()</code>, <code>next()</code>, <code>prev()</code>.</td></tr>
+      <tr><td><code>&lt;execution&gt;</code></td><td>Thực thi song song / không đồng bộ (C++17).</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- OBJECT UTILITIES -->
+  <h3>🧱 VI. Nhóm Thư viện Lập trình Hướng Đối tượng & Tiện ích</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;utility&gt;</code></td><td>Hàm tiện ích: <code>std::pair</code>, <code>swap()</code>, <code>move()</code>.</td></tr>
+      <tr><td><code>&lt;functional&gt;</code></td><td>Định nghĩa hàm, đối tượng hàm, lambda, <code>std::function</code>.</td></tr>
+      <tr><td><code>&lt;tuple&gt;</code></td><td>Bộ giá trị nhiều phần tử: <code>make_tuple()</code>, <code>get&lt;&gt;()</code>.</td></tr>
+      <tr><td><code>&lt;optional&gt;</code></td><td>Giá trị tùy chọn có thể rỗng (C++17).</td></tr>
+      <tr><td><code>&lt;variant&gt;</code></td><td>Biến có thể chứa nhiều kiểu dữ liệu (C++17).</td></tr>
+      <tr><td><code>&lt;any&gt;</code></td><td>Lưu mọi loại giá trị (C++17).</td></tr>
+      <tr><td><code>&lt;typeinfo&gt;</code></td><td>Thông tin kiểu dữ liệu tại runtime (RTTI).</td></tr>
+      <tr><td><code>&lt;type_traits&gt;</code></td><td>Kiểm tra và thao tác với kiểu dữ liệu (C++11+).</td></tr>
+      <tr><td><code>&lt;concepts&gt;</code></td><td>Định nghĩa ràng buộc khái niệm template (C++20).</td></tr>
+      <tr><td><code>&lt;compare&gt;</code></td><td>So sánh ba chiều (spaceship operator, C++20).</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- THREADING -->
+  <h3>🔧 VII. Nhóm Thư viện Hệ thống & Luồng (System / Threads)</h3>
+  <div class="scroll-table">
+  <table>
+    <thead><tr><th>Thư viện</th><th>Giải thích & Công dụng chi tiết</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;thread&gt;</code></td><td>Lập trình đa luồng: tạo, join, detach.</td></tr>
+      <tr><td><code>&lt;mutex&gt;</code></td><td>Khóa đồng bộ, tránh truy cập xung đột.</td></tr>
+      <tr><td><code>&lt;condition_variable&gt;</code></td><td>Đồng bộ tín hiệu giữa luồng.</td></tr>
+      <tr><td><code>&lt;atomic&gt;</code></td><td>Biến nguyên tử, tránh race condition.</td></tr>
+      <tr><td><code>&lt;future&gt;</code></td><td>Xử lý bất đồng bộ (<code>async()</code>, <code>future</code>, <code>promise</code>).</td></tr>
+      <tr><td><code>&lt;filesystem&gt;</code></td><td>Thao tác file, thư mục (C++17): <code>exists()</code>, <code>rename()</code>, <code>remove()</code>.</td></tr>
+    </tbody>
+  </table>
+</details>
+  </section>
+  
+  <section style="font-family: Arial, sans-serif; background: #f9fafb; padding: 20px; border-radius: 12px;">
+           <details>
+    <summary><h3 style="text-align:center;">🧮 THƯ VIỆN &lt;cmath&gt; – Toán học C++</h3></summary>
+  <blockquote style="border-left: 4px solid #4caf50; padding-left: 10px; color:#444;">
+    Thư viện <code>&lt;cmath&gt;</code> (hoặc <code>&lt;math.h&gt;</code>) cung cấp toàn bộ các hàm xử lý số học, lượng giác, logarit, mũ, làm tròn, căn bậc...
+  </blockquote>
+
+  <hr>
+
+  <h3>🟢 I. Hàm lũy thừa, căn bậc, giá trị tuyệt đối</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; min-width:600px; background:white;">
+      <thead style="background:#d4edda;">
+        <tr>
+          <th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>abs(x)</td><td>Giá trị tuyệt đối (int, float, double)</td><td>abs(-7)</td><td>7</td></tr>
+        <tr><td>fabs(x)</td><td>Giá trị tuyệt đối (dành cho double)</td><td>fabs(-3.14)</td><td>3.14</td></tr>
+        <tr><td>sqrt(x)</td><td>Căn bậc hai</td><td>sqrt(9)</td><td>3</td></tr>
+        <tr><td>cbrt(x)</td><td>Căn bậc ba</td><td>cbrt(8)</td><td>2</td></tr>
+        <tr><td>pow(x, y)</td><td>Lũy thừa (x^y)</td><td>pow(2, 3)</td><td>8</td></tr>
+        <tr><td>hypot(x, y)</td><td>√(x² + y²) – tránh tràn số</td><td>hypot(3, 4)</td><td>5</td></tr>
+        <tr><td>square(x)</td><td>Bình phương (C++26 có thể thêm chính thức)</td><td>square(5)</td><td>25 (tạm viết x*x thay thế)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🟠 II. Hàm logarit và số mũ</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#fff3cd;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>exp(x)</td><td>e^x</td><td>exp(1)</td><td>2.71828</td></tr>
+        <tr><td>expm1(x)</td><td>e^x - 1 (chính xác hơn với x nhỏ)</td><td>expm1(0.001)</td><td>≈ 0.0010005</td></tr>
+        <tr><td>log(x)</td><td>log_e(x) – logarit tự nhiên</td><td>log(2.71828)</td><td>1</td></tr>
+        <tr><td>log10(x)</td><td>log cơ số 10</td><td>log10(1000)</td><td>3</td></tr>
+        <tr><td>log2(x)</td><td>log cơ số 2</td><td>log2(8)</td><td>3</td></tr>
+        <tr><td>log1p(x)</td><td>log(1 + x) – chính xác với x rất nhỏ</td><td>log1p(0.001)</td><td>≈ 0.0009995</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🔵 III. Hàm lượng giác (radian)</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#cfe2ff;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>sin(x)</td><td>sin(x)</td><td>sin(π/2)</td><td>1</td></tr>
+        <tr><td>cos(x)</td><td>cos(x)</td><td>cos(0)</td><td>1</td></tr>
+        <tr><td>tan(x)</td><td>tan(x)</td><td>tan(π/4)</td><td>1</td></tr>
+        <tr><td>asin(x)</td><td>arcsin(x)</td><td>asin(1)</td><td>π/2</td></tr>
+        <tr><td>acos(x)</td><td>arccos(x)</td><td>acos(0)</td><td>π/2</td></tr>
+        <tr><td>atan(x)</td><td>arctan(x)</td><td>atan(1)</td><td>π/4</td></tr>
+        <tr><td>atan2(y, x)</td><td>arctan(y/x) – chính xác góc phần tư</td><td>atan2(1, 1)</td><td>π/4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🟣 IV. Hàm lượng giác hyperbol (hyperbolic)</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#e2d9f3;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>sinh(x)</td><td>sin hyperbol</td><td>sinh(0) = 0</td></tr>
+        <tr><td>cosh(x)</td><td>cos hyperbol</td><td>cosh(0) = 1</td></tr>
+        <tr><td>tanh(x)</td><td>tan hyperbol</td><td>tanh(1) ≈ 0.761</td></tr>
+        <tr><td>asinh(x)</td><td>arcsinh(x)</td><td>asinh(1) ≈ 0.881</td></tr>
+        <tr><td>acosh(x)</td><td>arccosh(x)</td><td>acosh(2) ≈ 1.316</td></tr>
+        <tr><td>atanh(x)</td><td>arctanh(x)</td><td>atanh(0.5) ≈ 0.549</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🟤 V. Hàm làm tròn số</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#f8d7da;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ceil(x)</td><td>Làm tròn lên</td><td>ceil(2.3)</td><td>3</td></tr>
+        <tr><td>floor(x)</td><td>Làm tròn xuống</td><td>floor(2.9)</td><td>2</td></tr>
+        <tr><td>round(x)</td><td>Làm tròn gần nhất</td><td>round(2.5)</td><td>3</td></tr>
+        <tr><td>trunc(x)</td><td>Cắt bỏ phần thập phân</td><td>trunc(2.9)</td><td>2</td></tr>
+        <tr><td>nearbyint(x)</td><td>Làm tròn gần nhất theo chế độ hiện tại</td><td>–</td><td>–</td></tr>
+        <tr><td>rint(x)</td><td>Tương tự nearbyint, trả về double</td><td>–</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🧩 VI. Hàm số dư và chia</h3>
+  <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; background:white;">
+      <thead style="background:#dee2e6;">
+        <tr><th>Hàm</th><th>Mô tả</th><th>Ví dụ</th><th>Kết quả</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>fmod(x, y)</td><td>Phần dư của phép chia thực</td><td>fmod(5.3, 2)</td><td>1.3</td></tr>
+        <tr><td>remainder(x, y)</td><td>Phần dư theo chuẩn IEEE</td><td>remainder(5.3, 2)</td><td>-0.7</td></tr>
+        <tr><td>remquo(x, y, &quo)</td><td>Lấy phần dư và phần nguyên của phép chia</td><td>–</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>🧠 VII. Hàm kiểm tra và so sánh</h3>
+  <ul>
+    <li><code>isnan(x)</code> – Kiểm tra x có phải NaN (Not a Number)</li>
+    <li><code>isinf(x)</code> – Kiểm tra x có vô cực (∞)</li>
+    <li><code>isfinite(x)</code> – Kiểm tra x có hữu hạn</li>
+    <li><code>signbit(x)</code> – Kiểm tra bit dấu (số âm)</li>
+    <li><code>fpclassify(x)</code> – Phân loại số (NaN, 0, normal...)</li>
+  </ul>
+
+  <hr>
+
+  <h3>🧮 VIII. Hàm góc & độ</h3>
+  <ul>
+    <li><code>degrees(x)</code> (C++20) – Đổi radian → độ, ví dụ: <code>degrees(π) = 180</code></li>
+    <li><code>radians(x)</code> (C++20) – Đổi độ → radian, ví dụ: <code>radians(180) = π</code></li>
+  </ul>
+
+  <hr>
+
+  <h3>🧷 IX. Một số hàm khác ít gặp</h3>
+  <ul>
+    <li><code>copysign(x, y)</code> – Trả về giá trị của x mang dấu của y</li>
+    <li><code>fdim(x, y)</code> – Phần dương của (x - y)</li>
+    <li><code>fmax(x, y)</code> – Lớn hơn trong hai số</li>
+    <li><code>fmin(x, y)</code> – Nhỏ hơn trong hai số</li>
+    <li><code>nextafter(x, y)</code> – Giá trị kế tiếp của x theo hướng y</li>
+    <li><code>nexttoward(x, y)</code> – Giống nextafter, chính xác hơn với long double</li>
+  </ul>
+
+       </details>
+</section>
+  
+  
+  <!-- ===== BẮT ĐẦU: BẢNG <iomanip> (một lệnh — một ví dụ — kết quả) ===== -->
+<section>
+     <details>
+  <style>
+    .fmt-table-wrap { overflow-x:auto; margin:12px 0; }
+    .fmt-table {
+      width:100%;
+      min-width:980px;
+      border-collapse:collapse;
+      font-size:14px;
+      font-family: Arial, sans-serif;
+    }
+    .fmt-table th, .fmt-table td {
+      border:1px solid #ddd;
+      padding:8px 10px;
+      vertical-align:top;
+      text-align:left;
+    }
+    .fmt-table thead th {
+      background:#0b76c2;
+      color:#fff;
+    }
+    .fmt-table tbody tr:nth-child(even) { background:#fbfdff; }
+    code.small { background:#f3f3f3; padding:2px 6px; border-radius:4px; font-family:Consolas,monospace; font-size:13px; }
+    pre.example { background:#f4f4f4; padding:8px; border-radius:6px; overflow-x:auto; font-family:Consolas,monospace; font-size:13px; }
+  </style>
+
+  <summary><h3>📘 Thư viện <code>&lt;iomanip&gt;</code> — Bảng lệnh (một lệnh • một ví dụ • kết quả)</h3></summary>
+  <p style="margin:0 0 8px 0; color:#555;">(đặc biệt hữu ích khi làm bảng, in số thực, căn lề, định dạng tiền tệ, v.v.)</p>
+
+  <div class="fmt-table-wrap">
+    <table class="fmt-table" role="table">
+      <thead>
+        <tr>
+          <th style="width:12%;">Lệnh</th>
+          <th style="width:22%;">Công dụng</th>
+          <th style="width:30%;">Chú thích chi tiết</th>
+          <th style="width:18%;">Ví dụ (dòng lệnh)</th>
+          <th style="width:18%;">Kết quả (hiển thị)</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- setprecision -->
+        <tr>
+          <td><code class="small">setprecision(n)</code></td>
+          <td>Đặt số chữ số có nghĩa (mặc định) hoặc chữ sau dấu phẩy (khi dùng <code>fixed</code>).</td>
+          <td>Nếu không có <code>fixed</code>, <code>setprecision</code> điều khiển *significant digits*; với <code>fixed</code> thì điều khiển số chữ sau dấu thập phân.</td>
+          <td><code class="small">cout &lt;&lt; setprecision(3) &lt;&lt; 12.3456;</code></td>
+          <td><code class="small">12.3</code></td>
+        </tr>
+
+        <!-- fixed -->
+        <tr>
+          <td><code class="small">fixed</code></td>
+          <td>In số thực ở dạng cố định — giữ đúng số chữ sau dấu phẩy theo <code>setprecision</code>.</td>
+          <td>Thường dùng để hiển thị số thập phân cố định (ví dụ tiền tệ, phần trăm), kết hợp với <code>setprecision</code>.</td>
+          <td><code class="small">cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; 3.14159;</code></td>
+          <td><code class="small">3.14</code></td>
+        </tr>
+
+        <!-- scientific -->
+        <tr>
+          <td><code class="small">scientific</code></td>
+          <td>In số thực ở dạng khoa học (dạng m × 10^e, có 'e').</td>
+          <td>Hoạt động cùng <code>setprecision</code> để điều khiển số chữ số hiển thị (mặc định 6 chữ số nghĩa).</td>
+          <td><code class="small">cout &lt;&lt; scientific &lt;&lt; setprecision(6) &lt;&lt; 123.456;</code></td>
+          <td><code class="small">1.234560e+02</code></td>
+        </tr>
+
+        <!-- showpoint -->
+        <tr>
+          <td><code class="small">showpoint</code></td>
+          <td>Luôn hiển thị dấu thập phân và các chữ số sau (theo precision) ngay cả nếu là .0.</td>
+          <td>Giúp hiển thị đồng nhất định dạng số (ví dụ 5.00000 thay vì 5).</td>
+          <td><code class="small">cout &lt;&lt; setprecision(5) &lt;&lt; showpoint &lt;&lt; 5.0;</code></td>
+          <td><code class="small">5.0000</code></td>
+        </tr>
+
+        <!-- noshowpoint -->
+        <tr>
+          <td><code class="small">noshowpoint</code></td>
+          <td>Tắt hiển thị phần thập phân khi không cần (mặc định).</td>
+          <td>Sử dụng khi muốn hiện dạng ngắn gọn cho số nguyên/float .0.</td>
+          <td><code class="small">cout &lt;&lt; noshowpoint &lt;&lt; 5.0;</code></td>
+          <td><code class="small">5</code></td>
+        </tr>
+
+        <!-- showpos -->
+        <tr>
+          <td><code class="small">showpos</code></td>
+          <td>Hiển thị dấu + trước các số dương.</td>
+          <td>Tiện khi cần làm nổi bật số dương (ví dụ báo cáo thay đổi ±).</td>
+          <td><code class="small">cout &lt;&lt; showpos &lt;&lt; 42;</code></td>
+          <td><code class="small">+42</code></td>
+        </tr>
+
+        <!-- noshowpos -->
+        <tr>
+          <td><code class="small">noshowpos</code></td>
+          <td>Tắt hiển thị dấu + (mặc định).</td>
+          <td>Trở về trạng thái không in dấu cộng trước số dương.</td>
+          <td><code class="small">cout &lt;&lt; noshowpos &lt;&lt; 42;</code></td>
+          <td><code class="small">42</code></td>
+        </tr>
+
+        <!-- dec -->
+        <tr>
+          <td><code class="small">dec</code></td>
+          <td>In số ở hệ thập phân (decimal) — chế độ mặc định.</td>
+          <td>Dùng khi trước đó bạn đã đổi sang <code>hex</code> hoặc <code>oct</code> và muốn quay về decimal.</td>
+          <td><code class="small">cout &lt;&lt; dec &lt;&lt; 255;</code></td>
+          <td><code class="small">255</code></td>
+        </tr>
+
+        <!-- hex -->
+        <tr>
+          <td><code class="small">hex</code></td>
+          <td>In số ở hệ 16 (hexadecimal).</td>
+          <td>Chữ hex thường in bằng chữ thường trừ khi dùng <code>uppercase</code>.</td>
+          <td><code class="small">cout &lt;&lt; hex &lt;&lt; 255;</code></td>
+          <td><code class="small">ff</code></td>
+        </tr>
+
+        <!-- oct -->
+        <tr>
+          <td><code class="small">oct</code></td>
+          <td>In số ở hệ 8 (octal).</td>
+          <td>Ít dùng nhưng hữu ích khi thao tác với chế độ cấp phát file/perm.</td>
+          <td><code class="small">cout &lt;&lt; oct &lt;&lt; 255;</code></td>
+          <td><code class="small">377</code></td>
+        </tr>
+
+        <!-- uppercase -->
+        <tr>
+          <td><code class="small">uppercase</code></td>
+          <td>In chữ hex và ký hiệu khoa học ('E') ở dạng chữ hoa.</td>
+          <td>Ảnh hưởng tới hex letters và phần exponent trong scientific.</td>
+          <td><code class="small">cout &lt;&lt; uppercase &lt;&lt; hex &lt;&lt; 255;</code></td>
+          <td><code class="small">FF</code></td>
+        </tr>
+
+        <!-- nouppercase -->
+        <tr>
+          <td><code class="small">nouppercase</code></td>
+          <td>Quay về in thường (mặc định).</td>
+          <td>Trở lại hành vi mặc định của thư viện IO.</td>
+          <td><code class="small">cout &lt;&lt; nouppercase &lt;&lt; hex &lt;&lt; 255;</code></td>
+          <td><code class="small">ff</code></td>
+        </tr>
+
+        <!-- setw -->
+        <tr>
+          <td><code class="small">setw(n)</code></td>
+          <td>Đặt độ rộng tối thiểu của trường in ra (padding nếu nhỏ hơn).</td>
+          <td>Không phải manipulator vĩnh viễn — chỉ áp dụng cho lần in tiếp theo.</td>
+          <td><code class="small">cout &lt;&lt; setw(5) &lt;&lt; 42;</code></td>
+          <td><code class="small">"   42"</code></td>
+        </tr>
+
+        <!-- setfill -->
+        <tr>
+          <td><code class="small">setfill(ch)</code></td>
+          <td>Đặt ký tự để lấp đầy khoảng trống khi dùng <code>setw</code>.</td>
+          <td>Ảnh hưởng cho các lần in tiếp theo cho tới khi thay đổi lại.</td>
+          <td><code class="small">cout &lt;&lt; setfill('*') &lt;&lt; setw(5) &lt;&lt; 42;</code></td>
+          <td><code class="small">"***42"</code></td>
+        </tr>
+
+        <!-- left -->
+        <tr>
+          <td><code class="small">left</code></td>
+          <td>Căn trái nội dung trong trường có độ rộng (setw).</td>
+          <td>Thường kết hợp với <code>setw</code> và <code>setfill</code>.</td>
+          <td><code class="small">cout &lt;&lt; left &lt;&lt; setw(5) &lt;&lt; 42;</code></td>
+          <td><code class="small">"42   "</code></td>
+        </tr>
+
+        <!-- right -->
+        <tr>
+          <td><code class="small">right</code></td>
+          <td>Căn phải nội dung (mặc định thường là right).</td>
+          <td>Phù hợp in số, căn chữ sang phải.</td>
+          <td><code class="small">cout &lt;&lt; right &lt;&lt; setw(5) &lt;&lt; 42;</code></td>
+          <td><code class="small">"   42"</code></td>
+        </tr>
+
+        <!-- internal -->
+        <tr>
+          <td><code class="small">internal</code></td>
+          <td>Giữ dấu (sign) ở trái, căn phải phần số; padding nằm giữa dấu và phần số.</td>
+          <td>Hữu ích khi in số âm/với dấu và cần giữ dấu ở vị trí cố định.</td>
+          <td><code class="small">cout &lt;&lt; internal &lt;&lt; setw(6) &lt;&lt; -42;</code></td>
+          <td><code class="small">"-   42"</code></td>
+        </tr>
+
+        <!-- boolalpha -->
+        <tr>
+          <td><code class="small">boolalpha</code></td>
+          <td>In giá trị boolean dưới dạng <code>true</code>/<code>false</code> thay vì 1/0.</td>
+          <td>Thay đổi trạng thái luồng cho đến khi dùng <code>noboolalpha</code>.</td>
+          <td><code class="small">cout &lt;&lt; boolalpha &lt;&lt; true;</code></td>
+          <td><code class="small">true</code></td>
+        </tr>
+
+        <!-- noboolalpha -->
+        <tr>
+          <td><code class="small">noboolalpha</code></td>
+          <td>Quay về in 1/0 (mặc định).</td>
+          <td>Trở về trạng thái mặc định in boolean là 1/0.</td>
+          <td><code class="small">cout &lt;&lt; noboolalpha &lt;&lt; true;</code></td>
+          <td><code class="small">1</code></td>
+        </tr>
+
+        <!-- ws (cin) -->
+        <tr>
+          <td><code class="small">ws</code></td>
+          <td>Bỏ qua tất cả ký tự trắng (space, tab, newline) trước khi đọc tiếp (dùng với >> hoặc getline).</td>
+          <td>Rất hữu ích khi chuyển từ >> sang getline để loại bỏ newline/space thừa.</td>
+          <td><code class="small">getline(cin &gt;&gt; ws, name);</code></td>
+          <td><code class="small">Đọc nguyên dòng, bỏ khoảng trắng đầu</code></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+  <h4>🧠 Ghi nhớ nhanh</h4>
+  <ul>
+    <li><code>fixed</code> + <code>setprecision(n)</code> để kiểm soát chữ sau dấu phẩy.</li>
+    <li>Dùng <code>setw</code> + <code>setfill</code> + <code>left/right/internal</code> để căn lề & padding.</li>
+    <li><code>hex/dec/oct</code> chuyển hệ đếm; <code>uppercase</code> ảnh hưởng chữ hex & exponent.</li>
+    <li><code>boolalpha</code> giúp in true/false thân thiện; <code>ws</code> dùng khi đọc dòng sau >>.</li>
+  </ul>
+   </details>
+</section>
+<!-- ===== KẾT THÚC: BẢNG <iomanip> ===== -->
+  
+  </div>
+  </details>
+
+</body>
+</html>
